@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef, useState } from 'react'
 
 import { ArrowDown, ArrowUp } from '@/assets'
+import { Label } from '@/components/ui/label'
 import * as RadixSelect from '@radix-ui/react-select'
 
 import s from './select.module.scss'
@@ -33,6 +34,7 @@ export const Select = (props: SelectPropsType) => {
         placeholder={'select'}
         value={value}
       >
+        <Label className={s.label} title={'Check-box'} />
         {itemSelect && itemSelect.title}
         <RadixSelect.Icon className={s.arrows}>
           {open ? <ArrowUp /> : <ArrowDown />}

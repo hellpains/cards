@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-import { Label } from '@/components/ui/label'
 import { Select } from '@/components/ui/select'
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
   return (
     <div>
       <Select className={'asdfasdf'} options={options} setValue={setValue} value={value} />
-      <Label title={'Select'} />
     </div>
   )
 }
