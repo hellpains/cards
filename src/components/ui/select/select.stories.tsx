@@ -13,10 +13,8 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 const options = [
-  { title: 'Moscow', value: '1' },
-  { title: 'Russia', value: '2' },
-  { title: 'Minks', value: '3' },
-  { title: 'Grozny', value: '4' },
+  { title: 'Check-box', value: '1' },
+  { title: 'Check-box', value: '2' },
 ]
 
 export const Default: Story = {
