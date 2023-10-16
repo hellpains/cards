@@ -12,6 +12,24 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {
-  args: {},
+const options = [
+  { title: 'Moscow', value: '1' },
+  { title: 'Russia', value: '2' },
+  { title: 'Minks', value: '3' },
+  { title: 'Grozny', value: '4' },
+]
+
+export const Default: Story = {
+  args: {
+    options: options,
+    value: '2',
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    options: options,
+    value: '2',
+  },
 }
