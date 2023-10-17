@@ -10,12 +10,20 @@ import s from './select.module.scss'
 export type SelectPropsType = {
   className?: string
   disabled?: boolean
+  label?: string
   options?: { title: string; value: any }[]
-  setValue?: (value: string) => void
-  value?: string
+  setValue: (value: any) => void
+  value: any
 }
 
-export const Select: FC<SelectPropsType> = ({ className, disabled, options, setValue, value }) => {
+export const Select: FC<SelectPropsType> = ({
+  className,
+  disabled,
+  label,
+  options,
+  setValue,
+  value,
+}) => {
   const itemSelect = options?.find(o => o.value === value)
   const [open, setOpen] = useState(false)
 
@@ -36,7 +44,7 @@ export const Select: FC<SelectPropsType> = ({ className, disabled, options, setV
         value={value}
       >
         <RadixSelect.Trigger className={classNames.trigger} placeholder={'select'} value={value}>
-          <Label className={s.label} title={'Check-box'} />
+          {label && <Label className={s.label} title={label} />}
           {itemSelect && itemSelect.title}
           <RadixSelect.Icon className={s.arrows}>
             {open ? <ArrowUp /> : <ArrowDown />}

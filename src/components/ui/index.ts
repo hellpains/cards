@@ -1,2 +1,4 @@
-export * from './select'
 export * from './button'
+export * from './label'
+export * from './pagination'
+export * from './select'

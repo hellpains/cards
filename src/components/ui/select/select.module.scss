@@ -3,7 +3,7 @@
 
   position: relative;
 
-  width: 210px;
+  width: 50px;
   padding: 6px 12px;
 
   font-size: 16px;
@@ -39,7 +39,7 @@
 
 .item {
   all: unset;
-  width: 210px;
+  width: 50px;
   padding: 7px 12px;
 
   &:hover {
@@ -53,6 +53,7 @@
   position: absolute;
   top: -25px;
   left: 0;
+  margin-bottom: 100px;
 }
 
 .arrows {
