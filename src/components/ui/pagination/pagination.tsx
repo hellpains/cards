@@ -103,9 +103,6 @@ const returnPaginationRange = (totalPage: number, page: number, siblings: number
   const showLeftDots = leftSiblingsIndex > 2
   const showRightDots = rightSiblingsIndex < totalPage - 2
 
-  const firstPageIndex = 1
-  const lastPageIndex = totalPage
-
   if (!showLeftDots && showRightDots) {
     const leftItemsCount = 3 + 2 * siblings
     const leftRange = _.range(1, leftItemsCount)
@@ -121,6 +118,6 @@ const returnPaginationRange = (totalPage: number, page: number, siblings: number
   if (showLeftDots && showRightDots) {
     const middleRange = _.range(leftSiblingsIndex, rightSiblingsIndex)
 
-    return [firstPageIndex, '...', ...middleRange, '...', lastPageIndex]
+    return [1, '...', ...middleRange, '...', totalPage]
   }
 }
