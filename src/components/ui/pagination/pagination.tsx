@@ -7,44 +7,16 @@ import s from './pagination.module.scss'
 
 type PaginationPropsType = {
   className?: string
-  currentPage: number
-  limit: string
+  limit: number
+  page: number
   paginate: (number: number) => void
-  setCurrentPage: (currentPage: number) => void
-  setLimit: (limit: string) => void
-  totalPosts: number
-}
-
-const returnPaginationRange = (totalPage: number, page: number, siblings: number) => {
-  const totalPageNoInArray = 7 + siblings
-
-  if (totalPageNoInArray >= totalPage) {
-    return _.range(1, totalPage + 1)
-  }
-  const leftSiblingsIndex = Math.max(page - siblings, 1)
-  const rightSiblingsIndex = Math.min(page + siblings, totalPage)
-  const showLeftDots = leftSiblingsIndex > 2
-  const showRightDots = rightSiblingsIndex < totalPage - 2
-
-  if (!showLeftDots && showRightDots) {
-    const leftItemsCount = 3 + 2 * siblings
-    const leftRange = _.range(1, leftItemsCount + 1)
-
-    return [...leftRange, '...', totalPage]
-  } else if (showLeftDots && !showRightDots) {
-    const rightItemsCount = 3 + 2 * siblings
-    const rightRange = _.range(totalPage - rightItemsCount + 1, totalPage + 1)
-
-    return [1, '...', ...rightRange]
-  } else {
-    const middleRange = _.range(leftSiblingsIndex, rightSiblingsIndex + 1)
-
-    return [1, '...', ...middleRange, '...', totalPage]
-  }
+  setLimit: (limit: number) => void
+  setPage: (page: number) => void
+  totalPage: number
 }
 
 export const Pagination = (props: PaginationPropsType) => {
-  const { className, currentPage, limit, paginate, setCurrentPage, setLimit, totalPosts } = props
+  const { className, limit, page, setLimit, setPage, totalPage } = props
   const options = [
     { title: '10', value: '10' },
     { title: '20', value: '20' },
@@ -54,7 +26,7 @@ export const Pagination = (props: PaginationPropsType) => {
   ]
   const pageNumbers = []
 
-  for (let i = 1; i < Math.ceil(totalPosts / +limit); i++) {
+  for (let i = (page - 1) * limit; i < page * limit; i++) {
     pageNumbers.push(i)
   }
   const classNames = {
@@ -65,18 +37,18 @@ export const Pagination = (props: PaginationPropsType) => {
   }
 
   const decrementCurrentPage = () => {
-    if (currentPage === 1) {
+    if (page === 1) {
       return
     }
-    setCurrentPage(currentPage - 1)
+    setPage(page - 1)
   }
   const incCurrentPage = () => {
-    if (currentPage === pageNumbers.length) {
+    if (page === pageNumbers.length) {
       return
     }
-    setCurrentPage(currentPage + 1)
+    setPage(page + 1)
   }
-  const array = returnPaginationRange(Math.ceil(totalPosts / +limit), currentPage, 2)
+  const array = returnPaginationRange(totalPage, page, 1)
 
   return (
     <div className={`${classNames.container}`}>
@@ -93,12 +65,12 @@ export const Pagination = (props: PaginationPropsType) => {
           if (disabled) {
             return
           }
-          paginate(+value)
+          setPage(value)
         }
 
         return (
           <div
-            className={`${classNames.page} ${currentPage === value ? s.activeNumber : ''} ${
+            className={`${classNames.page} ${page === value ? s.activeNumber : ''} ${
               disabled ? s.disabled : ''
             }`}
             key={value}
@@ -113,9 +85,42 @@ export const Pagination = (props: PaginationPropsType) => {
       </div>
       <div className={s.limits}>
         <div>Показать</div>
-        <Select options={options} setValue={setLimit} value={limit} />
+        <Select options={options} setValue={setLimit} value={String(limit)} />
         <div>на странице</div>
       </div>
     </div>
   )
+}
+
+const returnPaginationRange = (totalPage: number, page: number, siblings: number) => {
+  const totalPageNoInArray = 7 + siblings
+
+  if (totalPageNoInArray >= totalPage) {
+    return _.range(1, totalPage + 1)
+  }
+  const leftSiblingsIndex = Math.max(page - siblings, 1)
+  const rightSiblingsIndex = Math.min(page + siblings, totalPage)
+  const showLeftDots = leftSiblingsIndex > 2
+  const showRightDots = rightSiblingsIndex < totalPage - 2
+
+  const firstPageIndex = 1
+  const lastPageIndex = totalPage
+
+  if (!showLeftDots && showRightDots) {
+    const leftItemsCount = 3 + 2 * siblings
+    const leftRange = _.range(1, leftItemsCount)
+
+    return [...leftRange, '...', totalPage]
+  }
+  if (showLeftDots && !showRightDots) {
+    const rightItemsCount = 3 + 2 * siblings
+    const rightRange = _.range(totalPage - rightItemsCount + 1, totalPage)
+
+    return [1, '...', ...rightRange]
+  }
+  if (showLeftDots && showRightDots) {
+    const middleRange = _.range(leftSiblingsIndex, rightSiblingsIndex)
+
+    return [firstPageIndex, '...', ...middleRange, '...', lastPageIndex]
+  }
 }
