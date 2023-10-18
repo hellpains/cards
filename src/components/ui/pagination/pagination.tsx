@@ -55,37 +55,38 @@ export const Pagination = (props: PaginationPropsType) => {
       <div className={classNames.arrowLeft} onClick={decrementCurrentPage}>
         <ArrowLeft />
       </div>
-      {array.map(value => {
-        let disabled = false
+      {array &&
+        array.map(value => {
+          let disabled = false
 
-        if (value === '...') {
-          disabled = true
-        }
-        const changePage = () => {
-          if (disabled) {
-            return
+          if (value === '...') {
+            disabled = true
           }
-          setPage(value)
-        }
+          const changePage = () => {
+            if (disabled) {
+              return
+            }
+            setPage(value)
+          }
 
-        return (
-          <div
-            className={`${classNames.page} ${page === value ? s.activeNumber : ''} ${
-              disabled ? s.disabled : ''
-            }`}
-            key={value}
-            onClick={changePage}
-          >
-            {value}
-          </div>
-        )
-      })}
+          return (
+            <div
+              className={`${classNames.page} ${page === value ? s.activeNumber : ''} ${
+                disabled ? s.disabled : ''
+              }`}
+              key={value}
+              onClick={changePage}
+            >
+              {value}
+            </div>
+          )
+        })}
       <div className={classNames.arrowRight} onClick={incCurrentPage}>
         <ArrowRight />
       </div>
       <div className={s.limits}>
         <div>Показать</div>
-        <Select options={options} setValue={setLimit} value={String(limit)} />
+        <Select className={s.select} options={options} setValue={setLimit} value={String(limit)} />
         <div>на странице</div>
       </div>
     </div>
