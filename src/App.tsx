@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { Pagination, TabSwitcher } from '@/components'
+import { TextField } from '@/components/ui/textField'
 import * as Tabs from '@radix-ui/react-tabs'
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
         <Tabs.Content value={'4'}>Tab for content</Tabs.Content>
         <Tabs.Content value={'5'}>Tab five content</Tabs.Content>
       </TabSwitcher>
+      <TextField placeholder={'sldfjkas;dlkfjs;lkdfj'} />
     </div>
   )
 }

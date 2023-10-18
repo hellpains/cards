@@ -1,0 +1,72 @@
+.inputBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  input {
+    all: unset;
+
+    width: 284px;
+    height: 36px;
+    padding: 0 12px;
+
+    color: var(--dark-100, #808080);
+
+    border: 1px solid var(--dark-300, #4c4c4c);
+    border-radius: 2px;
+
+    &:active {
+      color: var(--light-100, #fff);
+      border: 1px solid var(--light-100, #fff);
+    }
+
+    &.error {
+      color: var(--danger-300, #f23d61);
+      border: 1px solid var(--danger-300, #f23d61);
+
+      &::placeholder {
+        color: var(--danger-300, #f23d61);
+      }
+    }
+
+    &:hover {
+      background: var(--dark-700, #171717);
+      border: 1px solid var(--dark-100, #808080);
+    }
+  }
+
+  .error {
+    color: var(--danger-300, #f23d61);
+  }
+
+  .searchInput {
+    width: 232px;
+    padding: 0 35px 0 40px;
+  }
+
+  .passwordInput {
+    width: 250px;
+    padding: 0 46px 0 12px;
+  }
+
+  .eye {
+    cursor: pointer;
+    position: absolute;
+    left: 265px;
+    padding: 7px;
+  }
+
+  .close {
+    cursor: pointer;
+    position: absolute;
+    left: 270px;
+    padding: 7px;
+  }
+
+  .search {
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    padding: 7px;
+  }
+}
