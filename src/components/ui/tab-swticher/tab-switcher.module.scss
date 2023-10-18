@@ -1,0 +1,36 @@
+.list {
+  display: inline-flex;
+  border: 1px solid var(--dark-300, #4c4c4c);
+  border-radius: 2px;
+}
+
+.item {
+  padding: 6px 24px;
+
+  font-size: 16px;
+
+  background-color: inherit;
+  border: 1px solid var(--dark-300, #4c4c4c);
+  border-radius: unset;
+
+  &[data-state='active'] {
+    background: var(--primary-500, #8c61ff);
+    border: 1px solid var(--primary-500, #8c61ff);
+
+    &:hover {
+      background: var(--primary-500, #8c61ff);
+      border: 1px solid var(--primary-500, #8c61ff);
+    }
+  }
+
+  &:hover {
+    background: var(--dark-300, #4c4c4c);
+    border: 1px solid var(--dark-100, #808080);
+  }
+
+  &:disabled {
+    color: var(--dark-300, #4c4c4c);
+    background: var(--dark-700, #171717);
+    border: 1px solid var(--dark-300, #4c4c4c);
+  }
+}
