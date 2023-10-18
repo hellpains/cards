@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Pagination } from '@/components'
+import { Button, Pagination } from '@/components'
 
 const message = [
   { id: 1, message: '1' },
@@ -101,6 +101,16 @@ function App() {
         setPage={setPage}
         totalPage={totalPage}
       />
+      <Button disabled variant={'primary'}>
+        Button
+      </Button>
+      <Button disabled variant={'secondary'}>
+        Button
+      </Button>
+      <Button disabled variant={'tertiary'}>
+        Button
+      </Button>
+      <Button variant={'primary'}>Button</Button>
     </div>
   )
 }
