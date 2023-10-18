@@ -1,22 +1,22 @@
 import { ArrowLeft, ArrowRight } from '@/assets'
 import { Select } from '@/components'
 import { clsx } from 'clsx'
-import _ from 'lodash'
 
 import s from './pagination.module.scss'
 
+import { usePagination } from './usePagination'
+
 type PaginationPropsType = {
-  className?: string
   limit: number
   page: number
-  paginate: (number: number) => void
   setLimit: (limit: number) => void
   setPage: (page: number) => void
   totalPage: number
 }
 
 export const Pagination = (props: PaginationPropsType) => {
-  const { className, limit, page, setLimit, setPage, totalPage } = props
+  const { limit, page, setLimit, setPage, totalPage } = props
+
   const options = [
     { title: '10', value: '10' },
     { title: '20', value: '20' },
@@ -24,64 +24,56 @@ export const Pagination = (props: PaginationPropsType) => {
     { title: '50', value: '50' },
     { title: '100', value: '100' },
   ]
-  const pageNumbers = []
+  let pageNo: number
 
-  for (let i = (page - 1) * limit; i < page * limit; i++) {
-    pageNumbers.push(i)
-  }
-  const classNames = {
-    arrowLeft: clsx(s.arrowLeft),
-    arrowRight: clsx(s.arrowRight),
-    container: clsx(s.container, className),
-    page: clsx(s.page),
+  if (page <= totalPage) {
+    pageNo = page
+  } else {
+    setPage(totalPage)
+    pageNo = page
   }
 
-  const decrementCurrentPage = () => {
-    if (page === 1) {
-      return
-    }
-    setPage(page - 1)
+  const array = usePagination(totalPage, pageNo, 2)
+
+  const classnames = {
+    pageNumber(value: number | string) {
+      return clsx(s.page, pageNo === value ? s.activeNumber : '')
+    },
   }
-  const incCurrentPage = () => {
-    if (page === pageNumbers.length) {
-      return
-    }
-    setPage(page + 1)
+  const onChangeHandler = (value: number | string) => {
+    changePage(value, pageNo, setPage, totalPage)
   }
-  const array = returnPaginationRange(totalPage, page, 1)
 
   return (
-    <div className={`${classNames.container}`}>
-      <div className={classNames.arrowLeft} onClick={decrementCurrentPage}>
+    <div className={`${s.container}`}>
+      <div className={s.arrowLeft} onClick={() => onChangeHandler('prevValue')}>
         <ArrowLeft />
       </div>
       {array &&
-        array.map(value => {
-          let disabled = false
-
-          if (value === '...') {
-            disabled = true
+        array.map((value: number | string, index) => {
+          if (value === pageNo) {
+            return (
+              <div
+                className={classnames.pageNumber(value)}
+                key={index}
+                onClick={() => onChangeHandler(value)}
+              >
+                {value}
+              </div>
+            )
+          } else {
+            return (
+              <div
+                className={classnames.pageNumber(value)}
+                key={index}
+                onClick={() => onChangeHandler(value)}
+              >
+                {value}
+              </div>
+            )
           }
-          const changePage = () => {
-            if (disabled) {
-              return
-            }
-            setPage(value)
-          }
-
-          return (
-            <div
-              className={`${classNames.page} ${page === value ? s.activeNumber : ''} ${
-                disabled ? s.disabled : ''
-              }`}
-              key={value}
-              onClick={changePage}
-            >
-              {value}
-            </div>
-          )
         })}
-      <div className={classNames.arrowRight} onClick={incCurrentPage}>
+      <div className={s.arrowRight} onClick={() => onChangeHandler('nextValue')}>
         <ArrowRight />
       </div>
       <div className={s.limits}>
@@ -92,33 +84,23 @@ export const Pagination = (props: PaginationPropsType) => {
     </div>
   )
 }
-
-const returnPaginationRange = (totalPage: number, page: number, siblings: number) => {
-  const totalPageNoInArray = 7 + siblings
-
-  if (totalPageNoInArray >= totalPage) {
-    return _.range(1, totalPage + 1)
-  }
-  const leftSiblingsIndex = Math.max(page - siblings, 1)
-  const rightSiblingsIndex = Math.min(page + siblings, totalPage)
-  const showLeftDots = leftSiblingsIndex > 2
-  const showRightDots = rightSiblingsIndex < totalPage - 2
-
-  if (!showLeftDots && showRightDots) {
-    const leftItemsCount = 3 + 2 * siblings
-    const leftRange = _.range(1, leftItemsCount)
-
-    return [...leftRange, '...', totalPage]
-  }
-  if (showLeftDots && !showRightDots) {
-    const rightItemsCount = 3 + 2 * siblings
-    const rightRange = _.range(totalPage - rightItemsCount + 1, totalPage)
-
-    return [1, '...', ...rightRange]
-  }
-  if (showLeftDots && showRightDots) {
-    const middleRange = _.range(leftSiblingsIndex, rightSiblingsIndex)
-
-    return [1, '...', ...middleRange, '...', totalPage]
+const changePage = (
+  value: number | string,
+  page: number,
+  setPage: (page: number) => void,
+  totalPage: number
+) => {
+  if (value === 'prevValue') {
+    if (page !== 1) {
+      setPage(page - 1)
+    }
+  } else if (value === 'nextValue') {
+    if (page !== totalPage) {
+      setPage(page + 1)
+    }
+  } else if (value === '...') {
+    return
+  } else {
+    setPage(+value)
   }
 }
