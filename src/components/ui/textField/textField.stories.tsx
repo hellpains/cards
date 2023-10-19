@@ -45,3 +45,13 @@ export const Error: Story = {
     value: 'Input',
   },
 }
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    password: true,
+    placeholder: 'Input',
+    search: false,
+    value: 'Input',
+  },
+}

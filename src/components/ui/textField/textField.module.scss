@@ -33,6 +33,15 @@
       background: var(--dark-700, #171717);
       border: 1px solid var(--dark-100, #808080);
     }
+
+    &:disabled {
+      color: var(--dark-300, #4c4c4c);
+
+      &:hover {
+        background-color: inherit;
+        border: 1px solid var(--dark-300, #4c4c4c);
+      }
+    }
   }
 
   .error {
@@ -54,6 +63,10 @@
     position: absolute;
     left: 265px;
     padding: 7px;
+
+    &.eyeDisabled * {
+      fill: #4c4c4c;
+    }
   }
 
   .close {
@@ -61,6 +74,14 @@
     position: absolute;
     left: 270px;
     padding: 7px;
+
+    :active * {
+      fill: white;
+    }
+
+    &.closeDisabled * {
+      fill: #4c4c4c;
+    }
   }
 
   .search {
@@ -68,5 +89,13 @@
     position: absolute;
     left: 0;
     padding: 7px;
+
+    &:active {
+      fill: white;
+    }
+
+    &.searchDisabled * {
+      fill: #4c4c4c;
+    }
   }
 }

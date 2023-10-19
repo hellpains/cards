@@ -1,0 +1,11 @@
+.card {
+  width: 420px;
+  height: 552px;
+
+  background: var(--dark-700, #171717);
+  filter: drop-shadow(-1px -1px 2px rgb(0 0 0 / 10%)) drop-shadow(1px 1px 2px rgb(0 0 0 / 10%));
+  border-radius: 2px;
+
+  stroke: #313131;
+  stroke-width: 1px;
+}
