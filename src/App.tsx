@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { Pagination } from '@/components'
+import { Slider } from '@/components/ui/slider'
 
 function App() {
   const [page, setPage] = useState(5)
@@ -13,21 +14,24 @@ function App() {
   }
 
   const totalPage = Math.ceil(message.length / limit)
+  const [value, setValue] = useState([2, 8])
 
   return (
     <div>
-      <ul>
-        {array.map((post, i) => (
-          <li key={i}>{post.message}</li>
-        ))}
-      </ul>
-      <Pagination
-        limit={limit}
-        page={page}
-        setLimit={setLimit}
-        setPage={setPage}
-        totalPage={totalPage}
-      />
+      {/*<ul>*/}
+      {/*  {array.map((post, i) => (*/}
+      {/*    <li key={i}>{post.message}</li>*/}
+      {/*  ))}*/}
+      {/*</ul>*/}
+      {/*<Pagination*/}
+      {/*  limit={limit}*/}
+      {/*  page={page}*/}
+      {/*  setLimit={setLimit}*/}
+      {/*  setPage={setPage}*/}
+      {/*  totalPage={totalPage}*/}
+      {/*/>*/}
+      <Slider setValue={setValue} value={value} />
+      heelo
     </div>
   )
 }
