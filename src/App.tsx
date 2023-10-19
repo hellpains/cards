@@ -1,19 +1,11 @@
 import { useState } from 'react'
 
-import { Pagination, TabSwitcher } from '@/components'
-import { TextField } from '@/components/ui/textField'
-import * as Tabs from '@radix-ui/react-tabs'
+import { Pagination } from '@/components'
 
 function App() {
   const [page, setPage] = useState(5)
   const [limit, setLimit] = useState(5)
-  const tabs = [
-    { title: 'Switcher', value: '1' },
-    { title: 'Switcher', value: '2' },
-    { title: 'Switcher', value: '3' },
-    { title: 'Switcher', value: '4' },
-    { title: 'Switcher', value: '5' },
-  ]
+
   const array = []
 
   for (let i = (page - 1) * limit; i < page * limit && message[i]; i++) {
@@ -36,15 +28,6 @@ function App() {
         setPage={setPage}
         totalPage={totalPage}
       />
-
-      <TabSwitcher tabs={tabs}>
-        <Tabs.Content value={'1'}>Tab one content</Tabs.Content>
-        <Tabs.Content value={'2'}>Tab two content</Tabs.Content>
-        <Tabs.Content value={'3'}>Tab three content</Tabs.Content>
-        <Tabs.Content value={'4'}>Tab for content</Tabs.Content>
-        <Tabs.Content value={'5'}>Tab five content</Tabs.Content>
-      </TabSwitcher>
-      <TextField placeholder={'sldfjkas;dlkfjs;lkdfj'} />
     </div>
   )
 }
