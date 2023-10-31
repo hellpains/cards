@@ -1,50 +1,44 @@
 import { useState } from 'react'
 
-import { Pagination } from '@/components'
-import { Slider } from '@/components/ui/slider'
-import { Typography } from '@/components/ui/typography'
+import { Label, Pagination, Select } from '@/components'
 
 function App() {
-  const [page, setPage] = useState(5)
-  const [limit, setLimit] = useState(5)
+  const [page, setPage] = useState(1)
+  const [limit, setLimit] = useState('10')
 
   const array = []
 
-  for (let i = (page - 1) * limit; i < page * limit && message[i]; i++) {
+  for (let i = (page - 1) * +limit; i < page * +limit && message[i]; i++) {
     array.push(message[i])
   }
 
-  const totalPage = Math.ceil(message.length / limit)
-  const [value, setValue] = useState([2, 8])
+  const totalPage = Math.ceil(message.length / +limit)
+  // const [value, setValue] = useState([2, 8])
+
+  const options = [
+    { title: 'value1', value: 'value1' },
+    { title: 'value2', value: 'value2' },
+    { title: 'value3', value: 'value3' },
+    { title: 'value4', value: 'value4' },
+  ]
+
+  const [value1, setValue1] = useState('value2')
 
   return (
     <div>
-      {/*<ul>*/}
-      {/*  {array.map((post, i) => (*/}
-      {/*    <li key={i}>{post.message}</li>*/}
-      {/*  ))}*/}
-      {/*</ul>*/}
-      {/*<Pagination*/}
-      {/*  limit={limit}*/}
-      {/*  page={page}*/}
-      {/*  setLimit={setLimit}*/}
-      {/*  setPage={setPage}*/}
-      {/*  totalPage={totalPage}*/}
-      {/*/>*/}
-      <Slider setValue={setValue} value={value} />
-      <Typography variant={'large'}>Typography</Typography>
-      <div></div>
-      <Typography variant={'h1'}>Typography</Typography>
-      <div></div>
-      <Typography variant={'h2'}>Typography</Typography>
-      <div></div>
-      <Typography variant={'h3'}>Typography</Typography>
-      <div></div>
-      <Typography variant={'body1'}>Typography</Typography>
-      <div></div>
-      <Typography variant={'link1'}>Typography</Typography>
-      <div></div>
-      <Typography variant={'link2'}>Typography</Typography>
+      <ul>
+        {array.map((post, i) => (
+          <li key={i}>{post.message}</li>
+        ))}
+      </ul>
+      <Pagination
+        limit={limit}
+        page={page}
+        setLimit={setLimit}
+        setPage={setPage}
+        totalPage={totalPage}
+      />
+      <Select options={options} setValue={setValue1} value={value1} />
     </div>
   )
 }

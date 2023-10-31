@@ -2,14 +2,15 @@ import { ArrowLeft, ArrowRight } from '@/assets'
 import { Select } from '@/components'
 import { clsx } from 'clsx'
 
+import ss from '../card/card.module.scss'
 import s from './pagination.module.scss'
 
 import { usePagination } from './usePagination'
 
 type PaginationPropsType = {
-  limit: number
+  limit: any
   page: number
-  setLimit: (limit: number) => void
+  setLimit: (limit: any) => void
   setPage: (page: number) => void
   totalPage: number
 }
@@ -78,7 +79,8 @@ export const Pagination = (props: PaginationPropsType) => {
       </div>
       <div className={s.limits}>
         <div>Показать</div>
-        <Select className={s.select} options={options} setValue={setLimit} value={String(limit)} />
+        <Select className={ss.select} options={options} setValue={setLimit} value={limit} />
+
         <div>на странице</div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
+import { Typography } from '@/components/ui/typography'
 import { clsx } from 'clsx'
 
 import s from './label.module.scss'
@@ -12,9 +13,9 @@ export type LabelPropsType = {
 export const Label = (props: LabelPropsType) => {
   const { className, title } = props
 
-  const classNames = {
-    label: clsx(s.label, className),
-  }
-
-  return <label className={classNames.label}>{title}</label>
+  return (
+    <Typography className={clsx(s.label, className)} variant={'caption'}>
+      {title}
+    </Typography>
+  )
 }

@@ -1,7 +1,8 @@
-import { ComponentPropsWithoutRef, FC, useState } from 'react'
+import { FC, useState } from 'react'
 
 import { ArrowDown, ArrowUp } from '@/assets'
 import { Label } from '@/components/ui/label'
+import { Typography } from '@/components/ui/typography'
 import * as RadixSelect from '@radix-ui/react-select'
 import { clsx } from 'clsx'
 
@@ -14,7 +15,7 @@ export type SelectPropsType = {
   options?: { title: string; value: any }[]
   setValue: (value: any) => void
   value: any
-} & ComponentPropsWithoutRef<'select'>
+}
 
 export const Select: FC<SelectPropsType> = ({
   className,
@@ -28,40 +29,39 @@ export const Select: FC<SelectPropsType> = ({
   const [open, setOpen] = useState(false)
 
   const classNames = {
-    container: clsx(s.container),
-    content: clsx(s.content, disabled ? s.disabled : ''),
+    container: clsx(className),
+    content: clsx(s.content, disabled ? s.disabled : '', className),
     item: clsx(s.item, className),
-    trigger: clsx(s.trigger, disabled ? s.disabled : ''),
+    trigger: clsx(s.trigger, disabled ? s.disabled : '', className),
   }
 
   return (
-    <RadixSelect.Root
-      disabled={disabled}
-      onOpenChange={() => {
-        setOpen(prev => !prev)
-      }}
-      onValueChange={setValue}
-      open={open}
-      value={value}
-    >
-      <RadixSelect.Trigger className={classNames.trigger} placeholder={'select'} value={value}>
-        {label && <Label className={s.label} title={label} />}
-        {itemSelect && itemSelect.title}
-        <RadixSelect.Icon className={s.arrows}>
-          {open ? <ArrowUp /> : <ArrowDown />}
-        </RadixSelect.Icon>
-        <span className={s.arrow}></span>
-      </RadixSelect.Trigger>
-      <RadixSelect.Content className={classNames.content}>
-        {options &&
-          options.map(o => {
-            return (
-              <RadixSelect.Item className={classNames.item} key={o.value} value={o.value}>
-                {o.title}
-              </RadixSelect.Item>
-            )
-          })}
-      </RadixSelect.Content>
-    </RadixSelect.Root>
+    <div className={classNames.container}>
+      <RadixSelect.Root
+        onOpenChange={() => setOpen(prev => !prev)}
+        onValueChange={setValue}
+        open={open}
+        value={value}
+      >
+        <RadixSelect.Trigger className={classNames.trigger} value={value}>
+          {label && <Label className={s.label} title={label} />}
+          <Typography variant={'body1'}>{itemSelect && itemSelect.title}</Typography>
+          <RadixSelect.Icon className={s.arrows}>
+            {open ? <ArrowUp /> : <ArrowDown />}
+          </RadixSelect.Icon>
+        </RadixSelect.Trigger>
+
+        <RadixSelect.Content className={classNames.content}>
+          {options &&
+            options.map(o => {
+              return (
+                <RadixSelect.Item className={s.item} key={o.value} value={o.value}>
+                  <Typography variant={'body1'}>{o.title}</Typography>
+                </RadixSelect.Item>
+              )
+            })}
+        </RadixSelect.Content>
+      </RadixSelect.Root>
+    </div>
   )
 }
