@@ -6,6 +6,10 @@ import { Button } from './'
 
 const meta = {
   argTypes: {
+    title: {
+      control: { type: 'text' },
+    },
+
     variant: {
       control: { type: 'radio' },
       options: ['primary', 'secondary', 'tertiary', 'link'],
@@ -32,6 +36,7 @@ export const PrimaryWithIcon: Story = {
       <>
         <Logout />
         Primary Button
+        <Logout />
       </>
     ),
     disabled: false,

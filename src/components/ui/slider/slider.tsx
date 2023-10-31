@@ -1,6 +1,7 @@
 import * as RadixSlider from '@radix-ui/react-slider'
 
 import s from './slider.module.scss'
+
 type SliderPropsType = {
   setValue: (value: number[]) => void
   value: number[]
@@ -25,6 +26,7 @@ export const Slider = (props: SliderPropsType) => {
         <RadixSlider.Thumb className={s.thumb} />
         <RadixSlider.Thumb className={s.thumb} />
       </RadixSlider.Root>
+
       <div className={s.value}>{value[1]}</div>
     </div>
   )

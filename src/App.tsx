@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { Pagination } from '@/components'
 import { Slider } from '@/components/ui/slider'
+import { Typography } from '@/components/ui/typography'
 
 function App() {
   const [page, setPage] = useState(5)
@@ -31,10 +32,23 @@ function App() {
       {/*  totalPage={totalPage}*/}
       {/*/>*/}
       <Slider setValue={setValue} value={value} />
-      heelo
+      <Typography variant={'large'}>Typography</Typography>
+      <div></div>
+      <Typography variant={'h1'}>Typography</Typography>
+      <div></div>
+      <Typography variant={'h2'}>Typography</Typography>
+      <div></div>
+      <Typography variant={'h3'}>Typography</Typography>
+      <div></div>
+      <Typography variant={'body1'}>Typography</Typography>
+      <div></div>
+      <Typography variant={'link1'}>Typography</Typography>
+      <div></div>
+      <Typography variant={'link2'}>Typography</Typography>
     </div>
   )
 }
+
 const message = [
   { id: 1, message: '1' },
   { id: 2, message: '2' },

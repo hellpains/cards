@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { ComponentPropsWithoutRef, FC, useState } from 'react'
 
 import { ArrowDown, ArrowUp } from '@/assets'
 import { Label } from '@/components/ui/label'
@@ -14,7 +14,7 @@ export type SelectPropsType = {
   options?: { title: string; value: any }[]
   setValue: (value: any) => void
   value: any
-}
+} & ComponentPropsWithoutRef<'select'>
 
 export const Select: FC<SelectPropsType> = ({
   className,
