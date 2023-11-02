@@ -2,7 +2,7 @@ import { RadioButtonChecked, RadioButtonUnchecked } from '@/assets'
 import { Typography } from '@/components/ui/typography'
 import * as RadioGroupRadix from '@radix-ui/react-radio-group'
 
-import s from './radioGroup.module.css'
+import s from './radioGroup.module.scss'
 
 type RadioGroupPropsType = {
   disabled?: boolean

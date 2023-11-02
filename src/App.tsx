@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Button, Modal, Pagination, RadioGroup, Select, TabSwitcher } from '@/components'
+import { Button, CheckBox, Modal, Pagination, RadioGroup, Select, TabSwitcher } from '@/components'
 import * as RadixDialog from '@radix-ui/react-dialog'
 import * as Tabs from '@radix-ui/react-tabs'
 
@@ -33,6 +33,7 @@ function App() {
 
   const [value1, setValue1] = useState('value2')
   const [open, setOpen] = useState(false)
+  const [checked, setChecked] = useState(false)
 
   return (
     <div>
@@ -51,18 +52,18 @@ function App() {
       {/*<div style={{ margin: '12px', width: '500px' }}>*/}
       {/*  <Select className={s.select} options={selectOptions} setValue={setValue1} value={value1} />*/}
       {/*</div>*/}
-      <TabSwitcher
-        tabs={[
-          { title: 'all', value: 'all' },
-          { title: 'my', value: 'my' },
-        ]}
-      >
-        <Tabs.Content value={'all'}>Tab one content</Tabs.Content>
-        <Tabs.Content value={'my'}>Tab two content</Tabs.Content>
-        <RadioGroup options={radioOptions} setValue={setRadio} value={radio} />
-      </TabSwitcher>
-
-      <Modal open={open} setOpen={setOpen} title={'title'}></Modal>
+      {/*<TabSwitcher*/}
+      {/*  tabs={[*/}
+      {/*    { title: 'all', value: 'all' },*/}
+      {/*    { title: 'my', value: 'my' },*/}
+      {/*  ]}*/}
+      {/*>*/}
+      {/*  <Tabs.Content value={'all'}>Tab one content</Tabs.Content>*/}
+      {/*  <Tabs.Content value={'my'}>Tab two content</Tabs.Content>*/}
+      {/*  <RadioGroup options={radioOptions} setValue={setRadio} value={radio} />*/}
+      {/*</TabSwitcher>*/}
+      <CheckBox checked={checked} label={'check-box'} setChecked={setChecked} />
+      {/*<Modal open={open} setOpen={setOpen} title={'title'}>hello</Modal>*/}
     </div>
   )
 }

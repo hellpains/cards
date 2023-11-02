@@ -4,7 +4,7 @@ import { Close } from '@/assets'
 import { Button, Typography } from '@/components'
 import * as RadixDialog from '@radix-ui/react-dialog'
 
-import s from './Modal.module.css'
+import s from './Modal.module.scss'
 
 export type ModalPropsType = {
   children: ReactNode
