@@ -1,0 +1,123 @@
+/* .modal { */
+
+/*  position: relative; */
+
+/*  overflow: auto; */
+
+/*  width: 100%; */
+
+/*  height: 100%; */
+
+/*  background-color: #234e99; */
+
+/*  background-color: rgb(0 0 0 / 50%); */
+
+/* } */
+
+/* .trigger { */
+
+/*  all: unset; */
+
+/* } */
+
+/* .close { */
+
+/* } */
+
+/* .dialogOverlay { */
+
+/*  position: fixed; */
+
+/*  inset: 0; */
+
+/*  overflow-y: auto; */
+
+/*  display: grid; */
+
+/*  place-items: center; */
+
+/*  width: 100%; */
+
+/*  height: 100%; */
+
+/*  background: rgba(0 0 0 / 50%); */
+
+/* } */
+
+/* .dialogContent { */
+
+/*  position: absolute; */
+
+/*  top: 50%; */
+
+/*  left: 50%; */
+
+/*  width: 100%; */
+
+/*  height: 100%; */
+
+/*  margin-top: -75px; */
+
+/*  margin-left: -100px; */
+
+/*  padding: 30px; */
+
+/*  background: white; */
+
+/*  border-radius: 4px; */
+
+/* } */
+
+.trigger {
+  all: unset;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgb(0 0 0 / 70%);
+}
+
+.content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 90vw;
+  max-width: 542px;
+  max-height: 85vh;
+
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500, #333);
+  border-radius: 2px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 24px;
+
+  border-bottom: 1px solid var(--color-dark-500, #333);
+}
+
+.closeButton {
+  all: unset;
+
+  cursor: pointer;
+
+  display: flex;
+
+  width: 24px;
+  height: 24px;
+
+  &:focus {
+    outline: none;
+  }
+}

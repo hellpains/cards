@@ -13,6 +13,10 @@ button {
     outline: none;
   }
 
+  &:active {
+    outline: none;
+  }
+
   &:disabled {
     cursor: default;
   }
@@ -24,6 +28,11 @@ button {
 
   &:active {
     background: var(--primary-700, #704ecc);
+    outline: none;
+  }
+
+  &:focus {
+    outline: none;
   }
 
   &:hover {

@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
-import { Pagination, RadioGroup, Select } from '@/components'
+import { Button, Modal, Pagination, RadioGroup, Select, TabSwitcher } from '@/components'
+import * as RadixDialog from '@radix-ui/react-dialog'
+import * as Tabs from '@radix-ui/react-tabs'
 
 import s from './components/ui/card/card.module.scss'
 
@@ -30,34 +32,37 @@ function App() {
   ]
 
   const [value1, setValue1] = useState('value2')
+  const [open, setOpen] = useState(false)
 
   return (
     <div>
-      <ul>
-        {array.map((post, i) => (
-          <li key={i}>{post.message}</li>
-        ))}
-      </ul>
-      <Pagination
-        limit={limit}
-        page={page}
-        setLimit={setLimit}
-        setPage={setPage}
-        totalPage={totalPage}
-      />
-      <div style={{ margin: '12px', width: '500px' }}>
-        <Select className={s.select} options={selectOptions} setValue={setValue1} value={value1} />
-      </div>
-      {/*<TabSwitcher*/}
-      {/*  tabs={[*/}
-      {/*    { title: 'all', value: 'all' },*/}
-      {/*    { title: 'my', value: 'my' },*/}
-      {/*  ]}*/}
-      {/*>*/}
-      {/*<Tabs.Content value={'all'}>Tab one content</Tabs.Content>*/}
-      {/*<Tabs.Content value={'my'}>Tab two content</Tabs.Content>*/}
-      <RadioGroup options={radioOptions} setValue={setRadio} value={radio} />
-      {/*</TabSwitcher>*/}
+      {/*<ul>*/}
+      {/*  {array.map((post, i) => (*/}
+      {/*    <li key={i}>{post.message}</li>*/}
+      {/*  ))}*/}
+      {/*</ul>*/}
+      {/*<Pagination*/}
+      {/*  limit={limit}*/}
+      {/*  page={page}*/}
+      {/*  setLimit={setLimit}*/}
+      {/*  setPage={setPage}*/}
+      {/*  totalPage={totalPage}*/}
+      {/*/>*/}
+      {/*<div style={{ margin: '12px', width: '500px' }}>*/}
+      {/*  <Select className={s.select} options={selectOptions} setValue={setValue1} value={value1} />*/}
+      {/*</div>*/}
+      <TabSwitcher
+        tabs={[
+          { title: 'all', value: 'all' },
+          { title: 'my', value: 'my' },
+        ]}
+      >
+        <Tabs.Content value={'all'}>Tab one content</Tabs.Content>
+        <Tabs.Content value={'my'}>Tab two content</Tabs.Content>
+        <RadioGroup options={radioOptions} setValue={setRadio} value={radio} />
+      </TabSwitcher>
+
+      <Modal open={open} setOpen={setOpen} title={'title'}></Modal>
     </div>
   )
 }
