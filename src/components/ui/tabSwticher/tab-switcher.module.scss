@@ -32,5 +32,10 @@
     color: var(--dark-300, #4c4c4c);
     background: var(--dark-700, #171717);
     border: 1px solid var(--dark-300, #4c4c4c);
+
+    &:hover {
+      background: var(--dark-700, #171717);
+      border: 1px solid var(--dark-300, #4c4c4c);
+    }
   }
 }

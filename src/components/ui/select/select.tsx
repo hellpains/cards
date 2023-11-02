@@ -29,29 +29,32 @@ export const Select: FC<SelectPropsType> = ({
   const [open, setOpen] = useState(false)
 
   const classNames = {
-    container: clsx(className),
     content: clsx(s.content, disabled ? s.disabled : '', className),
-    item: clsx(s.item, className),
-    trigger: clsx(s.trigger, disabled ? s.disabled : '', className),
+    item: clsx(s.item),
+    root: clsx(s.root, className),
+    trigger: clsx(s.trigger, disabled ? s.disabled : ''),
   }
 
   return (
-    <div className={classNames.container}>
+    <div className={classNames.root}>
       <RadixSelect.Root
+        disabled={disabled}
         onOpenChange={() => setOpen(prev => !prev)}
         onValueChange={setValue}
         open={open}
         value={value}
       >
         <RadixSelect.Trigger className={classNames.trigger} value={value}>
-          {label && <Label className={s.label} title={label} />}
-          <Typography variant={'body1'}>{itemSelect && itemSelect.title}</Typography>
-          <RadixSelect.Icon className={s.arrows}>
-            {open ? <ArrowUp /> : <ArrowDown />}
-          </RadixSelect.Icon>
+          <div className={className}>
+            {label && <Label className={s.label} title={label} />}
+            <Typography variant={'body1'}>{itemSelect && itemSelect.title}</Typography>
+            <RadixSelect.Icon className={s.arrows}>
+              {open ? <ArrowUp /> : <ArrowDown />}
+            </RadixSelect.Icon>{' '}
+          </div>
         </RadixSelect.Trigger>
 
-        <RadixSelect.Content className={classNames.content}>
+        <RadixSelect.Content className={classNames.content} position={'popper'}>
           {options &&
             options.map(o => {
               return (

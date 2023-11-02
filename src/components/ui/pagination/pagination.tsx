@@ -2,7 +2,6 @@ import { ArrowLeft, ArrowRight } from '@/assets'
 import { Select } from '@/components'
 import { clsx } from 'clsx'
 
-import ss from '../card/card.module.scss'
 import s from './pagination.module.scss'
 
 import { usePagination } from './usePagination'
@@ -79,7 +78,9 @@ export const Pagination = (props: PaginationPropsType) => {
       </div>
       <div className={s.limits}>
         <div>Показать</div>
-        <Select className={ss.select} options={options} setValue={setLimit} value={limit} />
+        <div className={s.selectWrap}>
+          <Select className={s.select} options={options} setValue={setLimit} value={limit} />
+        </div>
 
         <div>на странице</div>
       </div>

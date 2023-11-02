@@ -14,7 +14,7 @@ export const TabSwitcher = (props: TabSwitcherPropsType) => {
   const { children, disabled, tabs } = props
 
   return (
-    <Tabs.Root defaultValue={'2'}>
+    <Tabs.Root className={s.root} defaultValue={'2'}>
       <Tabs.List className={s.list}>
         {tabs.map(tab => {
           return (

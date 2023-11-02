@@ -14,13 +14,19 @@
   &:hover {
     background: var(--color-dark-500);
   }
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .content {
-  z-index: 123;
+  box-sizing: border-box;
+  width: var(--radix-select-trigger-width);
+  max-height: var(--radix-select-content-available-height);
+
   background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-300);
-  border-radius: 2px;
 }
 
 .item {
@@ -38,4 +44,12 @@
   position: absolute;
   top: 9px;
   right: 10px;
+}
+
+.root {
+  &[data-disabled] {
+    cursor: default;
+    color: var(--color-dark-300);
+    opacity: 0.5;
+  }
 }

@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
-import { Label, Pagination, Select } from '@/components'
+import { Pagination, RadioGroup, Select } from '@/components'
+
+import s from './components/ui/card/card.module.scss'
 
 function App() {
   const [page, setPage] = useState(1)
@@ -13,13 +15,18 @@ function App() {
   }
 
   const totalPage = Math.ceil(message.length / +limit)
-  // const [value, setValue] = useState([2, 8])
 
-  const options = [
+  const selectOptions = [
     { title: 'value1', value: 'value1' },
     { title: 'value2', value: 'value2' },
     { title: 'value3', value: 'value3' },
     { title: 'value4', value: 'value4' },
+  ]
+  const [radio, setRadio] = useState('value2')
+  const radioOptions = [
+    { title: 'value1', value: 'value1' },
+    { title: 'value2', value: 'value2' },
+    { title: 'value3', value: 'value3' },
   ]
 
   const [value1, setValue1] = useState('value2')
@@ -38,7 +45,19 @@ function App() {
         setPage={setPage}
         totalPage={totalPage}
       />
-      <Select options={options} setValue={setValue1} value={value1} />
+      <div style={{ margin: '12px', width: '500px' }}>
+        <Select className={s.select} options={selectOptions} setValue={setValue1} value={value1} />
+      </div>
+      {/*<TabSwitcher*/}
+      {/*  tabs={[*/}
+      {/*    { title: 'all', value: 'all' },*/}
+      {/*    { title: 'my', value: 'my' },*/}
+      {/*  ]}*/}
+      {/*>*/}
+      {/*<Tabs.Content value={'all'}>Tab one content</Tabs.Content>*/}
+      {/*<Tabs.Content value={'my'}>Tab two content</Tabs.Content>*/}
+      <RadioGroup options={radioOptions} setValue={setRadio} value={radio} />
+      {/*</TabSwitcher>*/}
     </div>
   )
 }

@@ -20,6 +20,10 @@
       border: 1px solid var(--light-100, #fff);
     }
 
+    &:focus {
+      outline: none;
+    }
+
     &.error {
       color: var(--danger-300, #f23d61);
       border: 1px solid var(--danger-300, #f23d61);

@@ -1,0 +1,68 @@
+.radio {
+  display: flex;
+  align-items: center;
+
+  /* justify-content: center; */
+
+  width: 122px;
+  height: 36px;
+
+  /* margin: 20px; */
+
+  /* background-color: #4c4c4c; */
+}
+
+.item {
+  all: unset;
+
+  width: 36px;
+  height: 36px;
+  margin: 4px;
+
+  border-radius: 25px;
+  outline: none;
+
+  &:focus {
+    background-color: var(--color-dark-700);
+    border: none;
+    outline: none;
+  }
+
+  &:hover {
+    background-color: var(--color-dark-500);
+    border: none;
+  }
+
+  &:active {
+    background-color: var(--color-accent-900);
+    border: none;
+  }
+
+  &[data-disabled] {
+    cursor: default;
+    opacity: 0.5;
+    background-color: inherit;
+  }
+}
+
+.indicator {
+  all: unset;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  outline: none;
+}
+
+.radioGroupRoot {
+  width: 300px;
+
+  &[data-disabled] {
+    cursor: default;
+    opacity: 0.5;
+  }
+}
