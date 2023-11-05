@@ -6,17 +6,18 @@ import { Label, Typography } from '@/components'
 import s from './textField.module.scss'
 
 export type TextFieldPropsType = {
+  className?: string
   error?: null | string
   label?: string
   password?: boolean
   search?: boolean
 } & ComponentPropsWithoutRef<'input'>
 export const TextField = forwardRef<HTMLInputElement, TextFieldPropsType>(
-  ({ error, label, password, search, ...rest }, ref) => {
-    const [passwordVisible, setPasswordVisible] = useState(false)
+  ({ className, error, label, password, search, ...rest }, ref) => {
+    const [passwordVisible, setPasswordVisible] = useState(true)
 
     return (
-      <div className={s.textField}>
+      <div className={`${s.textField} ${className}`}>
         <Label className={s.label}>{label}</Label>
         <div className={s.inputBox}>
           {search && (
@@ -29,7 +30,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldPropsType>(
               error ? s.error : ''
             }`}
             ref={ref}
-            type={passwordVisible ? 'password' : 'text'}
+            type={password && passwordVisible ? 'password' : 'text'}
             {...rest}
           />
           {password && (

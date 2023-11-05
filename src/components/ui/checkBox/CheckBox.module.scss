@@ -1,4 +1,7 @@
 .container {
+  display: flex;
+  justify-content: start;
+
   &[data-disabled] {
     cursor: default;
     opacity: 0.5;

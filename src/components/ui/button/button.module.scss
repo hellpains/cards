@@ -96,12 +96,6 @@ button {
     color: var(--primary-300, #a280ff);
   }
 
-  &:focus {
-    padding: 6px 12px;
-    border: 2px solid var(--info-700, #2f68cc);
-    border-radius: 130px;
-  }
-
   &:disabled {
     color: var(--primary-900, #382766);
   }
@@ -110,4 +104,5 @@ button {
 .fullWidth {
   justify-content: center;
   width: 100%;
+  padding: 8px 0;
 }

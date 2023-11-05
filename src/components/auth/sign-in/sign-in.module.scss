@@ -1,16 +1,52 @@
 .signIn {
   align-items: center;
+  justify-content: center;
 
   width: 420px;
-  height: 528px;
-  margin: 0 auto;
 
   background-color: var(--color-dark-700);
-  border-radius: 2px;
-}
+  border-radius: 3px;
 
-.title {
-  display: flex;
-  justify-content: center;
-  padding-top: 33px;
+  .title {
+    display: flex;
+    justify-content: center;
+    padding-top: 33px;
+  }
+
+  .form {
+    width: 348px;
+    margin: 0 auto;
+    color: var(--color-light-100);
+
+    .emailInput {
+      margin-bottom: 24px;
+    }
+
+    .checkbox {
+      margin: 10px 0 0 -10px;
+    }
+
+    .forgotPasswordLink {
+      display: flex;
+      justify-content: end;
+      margin: 6px 12px 66px 0;
+    }
+
+    .text {
+      display: flex;
+      justify-content: center;
+      margin: 20px auto 11px;
+      color: var(--color-light-900);
+    }
+
+    .buttonLink {
+      display: flex;
+      justify-content: center;
+
+      padding-bottom: 29px;
+
+      color: var(--color-accent-500);
+      text-decoration: underline;
+    }
+  }
 }

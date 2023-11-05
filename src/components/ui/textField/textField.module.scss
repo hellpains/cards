@@ -6,7 +6,6 @@
   input {
     all: unset;
 
-    width: 284px;
     height: 36px;
     padding: 0 12px;
 
@@ -57,19 +56,17 @@
   }
 
   .searchInput {
-    width: 232px;
     padding: 0 35px 0 40px;
   }
 
   .passwordInput {
-    width: 250px;
     padding: 0 46px 0 12px;
   }
 
   .eye {
     cursor: pointer;
     position: absolute;
-    left: 265px;
+    right: 5px;
     padding: 7px;
 
     &.eyeDisabled * {

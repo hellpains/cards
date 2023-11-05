@@ -16,11 +16,11 @@ const publicRoutes: RouteObject[] = [
         path: '/login',
       },
       {
-        element: <div>!!!</div>, // <SignUpPage />
+        element: <div>SignUpPage</div>, // <SignUpPage />
         path: '/registration',
       },
       {
-        element: <div>!!!</div>, // <ForgotPasswordPage/>
+        element: <div>ForgotPasswordPage</div>, // <ForgotPasswordPage/>
         path: '/forgot-password',
       },
     ],
@@ -29,15 +29,15 @@ const publicRoutes: RouteObject[] = [
 ]
 const privateRoutes: RouteObject[] = [
   {
-    element: <div>!!!</div>, // <DecksPage/>
+    element: <div>DecksPage</div>, // <DecksPage/>
     path: '/',
   },
   {
-    element: <div>!!!</div>, // <DeckPage/>
+    element: <div>DeckPage</div>, // <DeckPage/>
     path: '/decks/:deckId',
   },
   {
-    element: <div>!!!</div>, //<Profile/>
+    element: <div>Profile</div>, //<Profile/>
     path: '/profile',
   },
 ]

@@ -1,14 +1,16 @@
 import { Provider } from 'react-redux'
 
-import { SignIn } from './components'
+import { Router } from '@/router'
+
 import { store } from './services/store'
 
 function App() {
   return (
     <Provider store={store}>
-      <SignIn onSubmit={() => {}} />
+      <Router />
     </Provider>
   )
 }
 
 export default App
+// SignIn onSubmit={() => {}}
