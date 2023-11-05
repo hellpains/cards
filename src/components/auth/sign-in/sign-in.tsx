@@ -9,13 +9,13 @@ import { z } from 'zod'
 
 import s from './sign-in.module.scss'
 
-const loginSchema = z.object({
+const signInSchema = z.object({
   email: z.string().email(),
   password: z.string().min(3),
   rememberMe: z.boolean(),
 })
 
-type FormValues = z.infer<typeof loginSchema>
+type FormValues = z.infer<typeof signInSchema>
 // type SignInPropsType = {}
 export const SignIn = ({ onSubmit }: { onSubmit: (data: FormValues) => void }) => {
   const { control, handleSubmit } = useForm<FormValues>({
@@ -24,7 +24,7 @@ export const SignIn = ({ onSubmit }: { onSubmit: (data: FormValues) => void }) =
       password: '',
       rememberMe: false,
     },
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(signInSchema),
   })
 
   return (

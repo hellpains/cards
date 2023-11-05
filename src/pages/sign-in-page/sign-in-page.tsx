@@ -1,10 +1,9 @@
-import { SignIn } from '@/components'
-import { SignUp } from '@/components/auth/sign-up'
+import { ForgotPassword, SignIn, SignUp } from '@/components'
 
 export const SignInPage = () => {
   return (
     <div>
-      <SignUp onSubmit={() => {}} />
+      <ForgotPassword onSubmit={() => {}} />
     </div>
   )
 }

@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 // import { MemoryRouter } from 'react-router-dom'
 
-import { SignUp } from './sign-up'
+import { ForgotPassword } from './'
 
 const meta = {
-  component: SignUp,
+  component: ForgotPassword,
   // decorators: [
   //   Story => (
   //     <MemoryRouter initialEntries={['/']}>
@@ -14,8 +14,8 @@ const meta = {
   //   ),
   // ],
   tags: ['autodocs'],
-  title: 'Auth/SignUp',
-} satisfies Meta<typeof SignUp>
+  title: 'Auth/ForgotPassword',
+} satisfies Meta<typeof ForgotPassword>
 
 export default meta
 type Story = StoryObj<typeof meta>
