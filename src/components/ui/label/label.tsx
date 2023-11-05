@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, ReactNode } from 'react'
 
 import { Typography } from '@/components/ui/typography'
 import { clsx } from 'clsx'
@@ -6,16 +6,16 @@ import { clsx } from 'clsx'
 import s from './label.module.scss'
 
 export type LabelPropsType = {
+  children?: ReactNode
   className?: string
-  title: string
-} & ComponentPropsWithoutRef<'select'>
+} & ComponentPropsWithoutRef<'label'>
 
 export const Label = (props: LabelPropsType) => {
-  const { className, title } = props
+  const { children, className } = props
 
   return (
-    <Typography className={clsx(s.label, className)} variant={'caption'}>
-      {title}
+    <Typography as={'label'} className={clsx(s.label, className)} variant={'body2'}>
+      {children}
     </Typography>
   )
 }

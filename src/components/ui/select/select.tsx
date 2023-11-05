@@ -29,7 +29,7 @@ export const Select: FC<SelectPropsType> = ({
   const [open, setOpen] = useState(false)
 
   const classNames = {
-    content: clsx(s.content, disabled ? s.disabled : '', className),
+    content: clsx(s.content, disabled ? s.disabled : ''),
     item: clsx(s.item),
     root: clsx(s.root, className),
     trigger: clsx(s.trigger, disabled ? s.disabled : ''),
@@ -45,13 +45,11 @@ export const Select: FC<SelectPropsType> = ({
         value={value}
       >
         <RadixSelect.Trigger className={classNames.trigger} value={value}>
-          <div className={className}>
-            {label && <Label className={s.label} title={label} />}
-            <Typography variant={'body1'}>{itemSelect && itemSelect.title}</Typography>
-            <RadixSelect.Icon className={s.arrows}>
-              {open ? <ArrowUp /> : <ArrowDown />}
-            </RadixSelect.Icon>{' '}
-          </div>
+          {label && <Label className={s.label} title={label} />}
+          <Typography variant={'body1'}>{itemSelect && itemSelect.title}</Typography>
+          <RadixSelect.Icon className={s.arrows}>
+            {open ? <ArrowUp /> : <ArrowDown />}
+          </RadixSelect.Icon>{' '}
         </RadixSelect.Trigger>
 
         <RadixSelect.Content className={classNames.content} position={'popper'}>
