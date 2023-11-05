@@ -1,0 +1,42 @@
+.signUp {
+  width: 420px;
+  margin: auto;
+  border-radius: 3px;
+
+  .title {
+    display: flex;
+    justify-content: center;
+    padding: 33px 0 27px;
+  }
+
+  .form {
+    width: 348px;
+    margin: 0 auto;
+    color: var(--color-light-100);
+
+    .password {
+      margin: 24px 0;
+    }
+
+    .signUpButton {
+      margin: 60px 0 20px;
+    }
+
+    .text {
+      display: flex;
+      justify-content: center;
+      margin: 0 auto 11px;
+      color: var(--color-light-900);
+    }
+
+    .buttonLink {
+      display: flex;
+      justify-content: center;
+
+      padding-bottom: 29px;
+
+      color: var(--color-accent-500);
+      text-decoration: underline;
+    }
+  }
+}

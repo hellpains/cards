@@ -60,7 +60,7 @@ export const SignIn = ({ onSubmit }: { onSubmit: (data: FormValues) => void }) =
         <Typography className={s.text} variant={'body2'}>
           Don't have an account?
         </Typography>
-        <Button as={NavLink} className={s.buttonLink} to={'/sign-in'} variant={'link'}>
+        <Button as={NavLink} className={s.buttonLink} to={'/sign-up'} variant={'link'}>
           Sign Up
         </Button>
       </form>
