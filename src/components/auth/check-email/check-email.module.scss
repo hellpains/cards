@@ -1,0 +1,38 @@
+.checkEmail {
+  width: 420px;
+  margin: auto;
+
+  .container {
+    width: 348px;
+    margin: 0 auto;
+    color: var(--color-light-100);
+
+    .title {
+      display: flex;
+      justify-content: center;
+      padding: 33px 0 27px;
+    }
+
+    .emailIcon {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 19px;
+    }
+
+    .text {
+      color: var(--color-dark-100);
+      text-align: center;
+    }
+
+    .button {
+      display: block;
+
+      margin: 65px 0 44px;
+
+      text-align: center;
+
+      border-radius: 4px;
+      box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
+    }
+  }
+}

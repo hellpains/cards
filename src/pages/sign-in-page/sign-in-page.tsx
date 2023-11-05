@@ -1,9 +1,9 @@
-import { ForgotPassword, SignIn, SignUp } from '@/components'
+import { CheckEmail, ForgotPassword, SignIn, SignUp } from '@/components'
 
 export const SignInPage = () => {
   return (
     <div>
-      <ForgotPassword onSubmit={() => {}} />
+      <CheckEmail />
     </div>
   )
 }
