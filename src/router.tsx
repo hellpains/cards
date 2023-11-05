@@ -13,11 +13,11 @@ const publicRoutes: RouteObject[] = [
     children: [
       {
         element: <SignInPage />,
-        path: '/login',
+        path: '/sign-in',
       },
       {
         element: <div>SignUpPage</div>, // <SignUpPage />
-        path: '/registration',
+        path: '/sign-up',
       },
       {
         element: <div>ForgotPasswordPage</div>, // <ForgotPasswordPage/>

@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { NavLink } from 'react-router-dom'
 
-import { Button, Typography } from '@/components'
+import { Button, Card, Typography } from '@/components'
 import { ControlledCheckbox } from '@/components/controlled'
 import { ControlledTextField } from '@/components/controlled/controlled-textField'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -28,7 +28,7 @@ export const SignIn = ({ onSubmit }: { onSubmit: (data: FormValues) => void }) =
   })
 
   return (
-    <div className={s.signIn}>
+    <Card className={s.signIn}>
       <Typography className={s.title} variant={'large'}>
         Sign In
       </Typography>
@@ -60,10 +60,10 @@ export const SignIn = ({ onSubmit }: { onSubmit: (data: FormValues) => void }) =
         <Typography className={s.text} variant={'body2'}>
           Don't have an account?
         </Typography>
-        <Button as={NavLink} className={s.buttonLink} to={'/registration'} variant={'link'}>
+        <Button as={NavLink} className={s.buttonLink} to={'/sign-in'} variant={'link'}>
           Sign Up
         </Button>
       </form>
-    </div>
+    </Card>
   )
 }

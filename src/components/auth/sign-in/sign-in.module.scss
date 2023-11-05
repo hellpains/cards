@@ -1,16 +1,13 @@
 .signIn {
-  align-items: center;
-  justify-content: center;
-
   width: 420px;
-
+  margin: auto;
   background-color: var(--color-dark-700);
   border-radius: 3px;
 
   .title {
     display: flex;
     justify-content: center;
-    padding-top: 33px;
+    padding: 33px 0 27px;
   }
 
   .form {
