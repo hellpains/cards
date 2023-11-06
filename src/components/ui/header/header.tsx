@@ -5,13 +5,13 @@ import { Button, Typography } from '@/components'
 import s from './header.module.scss'
 
 type HeaderProps = {
-  email: string
-  isAuth: boolean
-  name: string
+  email?: string
+  isAuth?: boolean
+  name?: string
 }
 export const Header = ({
-  email = 'rustam2004sadulaev@mail.ru',
-  isAuth = false,
+  // email = 'rustam2004sadulaev@mail.ru',
+  isAuth = true,
   name = 'hellpains',
 }: HeaderProps) => {
   return (

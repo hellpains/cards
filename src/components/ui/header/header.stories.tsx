@@ -15,13 +15,11 @@ type Story = StoryObj<typeof meta>
 export const IsAuth: Story = {
   args: {
     isAuth: true,
-    name: 'hellpains',
   },
 }
 
 export const IsNotAuth: Story = {
   args: {
     isAuth: false,
-    name: 'hellpains',
   },
 }

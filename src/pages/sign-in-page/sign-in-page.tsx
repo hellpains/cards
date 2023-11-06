@@ -1,10 +1,9 @@
-import { CheckEmail, ForgotPassword, SignIn, SignUp } from '@/components'
-import { Header } from '@/components/ui/header'
+import { CheckEmail, ForgotPassword, Header, SignIn, SignUp } from '@/components'
 
 export const SignInPage = () => {
   return (
     <div>
-      <Header isAuth={false} name={'hellpains'} />
+      <Header />
       <SignIn onSubmit={() => {}} />
     </div>
   )
