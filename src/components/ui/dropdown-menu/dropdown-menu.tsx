@@ -18,7 +18,12 @@ export const DropdownMenu = ({ children, email, name, variant }: DropdownMenuPro
       <RadixDropdownMenu.Trigger className={s.trigger}>{children}</RadixDropdownMenu.Trigger>
       <RadixDropdownMenu.Portal>
         {variant == 'profile' ? (
-          <RadixDropdownMenu.Content className={s.content}>
+          <RadixDropdownMenu.Content
+            align={'end'}
+            alignOffset={-7}
+            className={s.content}
+            sideOffset={2}
+          >
             <div className={s.container}>
               <div className={s.arrow}></div>
               <div className={s.userInfo}>
@@ -43,7 +48,12 @@ export const DropdownMenu = ({ children, email, name, variant }: DropdownMenuPro
             </div>
           </RadixDropdownMenu.Content>
         ) : (
-          <RadixDropdownMenu.Content className={s.content2}>
+          <RadixDropdownMenu.Content
+            align={'end'}
+            alignOffset={-7}
+            className={s.content}
+            sideOffset={2}
+          >
             <div className={s.arrow}></div>
             <div className={s.container}>
               <div className={s.learn}>

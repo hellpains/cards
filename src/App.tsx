@@ -2,13 +2,13 @@ import { Provider } from 'react-redux'
 
 import { DropdownMenu } from '@/components/ui/dropdown-menu'
 import { Image } from '@/components/ui/image'
-// import { Router } from '@/router'
+import { Router } from '@/router'
 import { store } from '@/services'
 
 function App() {
   return (
     <Provider store={store}>
-      {/*<Router />*/}
+      <Router />
       <div
         style={{
           alignItems: 'center',
@@ -19,7 +19,7 @@ function App() {
           width: '600px',
         }}
       >
-        <DropdownMenu email={'rustam2004sadulaev@mail.ru'} name={'hellpains'} variant={'profile'}>
+        <DropdownMenu email={'rustam2004sadulaev@mail.ru'} name={'hellpains'} variant={'edit'}>
           <Image
             height={36}
             src={'https://sunmag.me/wp-content/uploads/2019/11/sunmag-005-small-avatar.png'}

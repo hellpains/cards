@@ -1,6 +1,8 @@
 import { NavLink } from 'react-router-dom'
 
 import { Button, Typography } from '@/components'
+import { DropdownMenu } from '@/components/ui/dropdown-menu'
+import { Image } from '@/components/ui/image'
 
 import s from './header.module.scss'
 
@@ -10,7 +12,7 @@ type HeaderProps = {
   name?: string
 }
 export const Header = ({
-  // email = 'rustam2004sadulaev@mail.ru',
+  email = 'rustam2004sadulaev@mail.ru',
   isAuth = true,
   name = 'hellpains',
 }: HeaderProps) => {
@@ -21,8 +23,15 @@ export const Header = ({
           Cards
         </Typography>
         {isAuth ? (
-          <div>
+          <div className={s.info}>
             <Typography className={s.name}>{name}</Typography>
+            <DropdownMenu email={email} name={name} variant={'profile'}>
+              <Image
+                height={36}
+                src={'https://sunmag.me/wp-content/uploads/2019/11/sunmag-005-small-avatar.png'}
+                width={36}
+              />
+            </DropdownMenu>
           </div>
         ) : (
           <Button
