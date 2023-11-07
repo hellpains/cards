@@ -6,7 +6,7 @@ import { Image } from '@/components/ui/image'
 
 import s from './personal-information.module.scss'
 
-type PersonalInformationProps = {
+type Props = {
   avatarUrl?: string
   email?: string
   name?: string
@@ -15,7 +15,7 @@ export const PersonalInformation = ({
   avatarUrl = 'https://sunmag.me/wp-content/uploads/2019/11/sunmag-005-small-avatar.png',
   email = 'rustam2004sadulaev@mail.ru',
   name = 'hellpains',
-}: PersonalInformationProps) => {
+}: Props) => {
   const [edit, setEdit] = useState(false)
   const [nickname, setNickname] = useState(name)
 

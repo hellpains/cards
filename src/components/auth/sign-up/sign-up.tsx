@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 import { Button, Card, Typography } from '@/components'
 import { ControlledTextField } from '@/components/controlled/controlled-textField'
+import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -37,6 +38,7 @@ export const SignUp = ({ onSubmit }: { onSubmit: (data: FormValues) => void }) =
         Sign Up
       </Typography>
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+        <DevTool control={control} />
         <ControlledTextField control={control} label={'Email'} name={'email'} />
         <ControlledTextField
           className={s.password}

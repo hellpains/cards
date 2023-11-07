@@ -1,11 +1,18 @@
-import { CheckEmail, ForgotPassword, Header, SignIn, SignUp } from '@/components'
-import { PersonalInformation } from '@/components/profile'
+import {
+  // CheckEmail,
+  // ForgotPassword,
+  Header,
+  NewPassword,
+  // PersonalInformation,
+  // SignIn,
+  // SignUpj,
+} from '@/components'
 
 export const SignInPage = () => {
   return (
     <div>
       <Header />
-      <PersonalInformation />
+      <NewPassword onSubmit={() => {}} />
     </div>
   )
 }

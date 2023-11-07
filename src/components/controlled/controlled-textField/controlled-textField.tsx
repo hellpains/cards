@@ -5,7 +5,7 @@ import { TextField, TextFieldPropsType } from '@/components'
 export type ControlledTextFieldPropsType<T extends FieldValues> = {
   control: Control<T>
   name: FieldPath<T>
-} & Omit<TextFieldPropsType, 'id' | 'onChange' | 'value'>
+} & Omit<TextFieldPropsType, 'onChange' | 'value'>
 export const ControlledTextField = <T extends FieldValues>(
   props: ControlledTextFieldPropsType<T>
 ) => {

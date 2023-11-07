@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux'
 
-import { DropdownMenu } from '@/components/ui/dropdown-menu'
-import { Image } from '@/components/ui/image'
+// import { DropdownMenu } from '@/components/ui/dropdown-menu'
+// import { Image } from '@/components/ui/image'
 import { Router } from '@/router'
 import { store } from '@/services'
 

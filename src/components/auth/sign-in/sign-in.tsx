@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { Button, Card, Typography } from '@/components'
 import { ControlledCheckbox } from '@/components/controlled'
 import { ControlledTextField } from '@/components/controlled/controlled-textField'
+// import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -33,6 +34,7 @@ export const SignIn = ({ onSubmit }: { onSubmit: (data: FormValues) => void }) =
         Sign In
       </Typography>
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+        {/*<DevTool control={control} />*/}
         <ControlledTextField
           className={s.emailInput}
           control={control}
