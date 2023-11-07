@@ -17,8 +17,10 @@ const signInSchema = z.object({
 })
 
 type FormValues = z.infer<typeof signInSchema>
-// type SignInPropsType = {}
-export const SignIn = ({ onSubmit }: { onSubmit: (data: FormValues) => void }) => {
+type SignInPropsType = {
+  onSubmit: (data: FormValues) => void
+}
+export const SignIn = ({ onSubmit }: SignInPropsType) => {
   const { control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       email: '',

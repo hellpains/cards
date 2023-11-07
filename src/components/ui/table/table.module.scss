@@ -1,0 +1,25 @@
+.table {
+  border-collapse: collapse;
+  width: 1008px;
+  margin: 100px auto;
+  color: var(--color-light-100);
+}
+
+.tableHead {
+  width: 1008px;
+  background-color: var(--color-dark-500);
+}
+
+.tableHeadCell {
+  padding: 6px 24px;
+  text-align: start;
+}
+
+.tableRow {
+  border: 1px solid var(--color-dark-500);
+}
+
+.tableCell {
+  align-items: center;
+  padding: 6px 24px;
+}

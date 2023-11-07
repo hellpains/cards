@@ -48,6 +48,10 @@ const router = createBrowserRouter([
     element: <PrivateRoutes />,
   },
   ...publicRoutes,
+  {
+    element: <h1>404</h1>,
+    path: '*',
+  },
 ])
 
 export const Router = () => {

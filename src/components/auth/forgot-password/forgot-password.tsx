@@ -1,27 +1,14 @@
-import { useForm } from 'react-hook-form'
 import { NavLink } from 'react-router-dom'
 
 import { Button, Card, Typography } from '@/components'
+import { FormValues, useForgotPasswordForm } from '@/components/auth/forgot-password'
 import { ControlledTextField } from '@/components/controlled/controlled-textField'
 // import { DevTool } from '@hookform/devtools'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import s from './forgot-password.module.scss'
 
-const forgotPasswordSchema = z.object({
-  email: z.string().email(),
-})
-
-type FormValues = z.infer<typeof forgotPasswordSchema>
-
 export const ForgotPassword = ({ onSubmit }: { onSubmit: (data: FormValues) => void }) => {
-  const { control, handleSubmit } = useForm<FormValues>({
-    defaultValues: {
-      email: '',
-    },
-    resolver: zodResolver(forgotPasswordSchema),
-  })
+  const { control, handleSubmit } = useForgotPasswordForm()
 
   return (
     <Card className={s.forgotPassword}>

@@ -1,8 +1,6 @@
 .card {
-  position: absolute;
-  top: 380px;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 1008px;
+  margin: -380px auto;
 
   background-color: var(--color-dark-700);
   border-radius: 3px;
