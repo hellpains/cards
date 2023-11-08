@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { ForgotPasswordPage, SignInPage, SignUpPage } from './pages'
+import { ProfilePage } from './pages/profile-page/profile-page'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -37,7 +38,7 @@ const privateRoutes: RouteObject[] = [
     path: '/decks/:deckId',
   },
   {
-    element: <div>Profile</div>, //<Profile/>
+    element: <ProfilePage />, //<ProfilePage/>
     path: '/profile',
   },
 ]

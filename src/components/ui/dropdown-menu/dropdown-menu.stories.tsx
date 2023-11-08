@@ -25,7 +25,7 @@ export const Profile: Story = {
     ),
     email: 'rustam2004sadulaev@mail.ru',
     name: 'hellpains',
-    variant: 'profile',
+    variant: 'profile-page',
   },
 }
 

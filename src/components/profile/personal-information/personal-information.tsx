@@ -61,7 +61,7 @@ export const PersonalInformation = ({
           </div>
         </div>
       ) : (
-        <div className={s.changeName} style={{ padding: '0 36px' }}>
+        <div className={s.changeName}>
           <TextField
             className={s.input}
             label={'Nickmame'}

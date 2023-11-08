@@ -10,14 +10,14 @@ type DropdownMenuProps = {
   children?: ReactNode
   email?: string
   name?: string
-  variant?: 'edit' | 'profile'
+  variant?: 'edit' | 'profile-page'
 }
 export const DropdownMenu = ({ children, email, name, variant }: DropdownMenuProps) => {
   return (
     <RadixDropdownMenu.Root>
       <RadixDropdownMenu.Trigger className={s.trigger}>{children}</RadixDropdownMenu.Trigger>
       <RadixDropdownMenu.Portal>
-        {variant == 'profile' ? (
+        {variant == 'profile-page' ? (
           <RadixDropdownMenu.Content
             align={'end'}
             alignOffset={-7}

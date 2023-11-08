@@ -28,7 +28,7 @@ export const Header = ({
         {isAuth ? (
           <div className={s.info}>
             <Typography className={s.name}>{name}</Typography>
-            <DropdownMenu email={email} name={name} variant={'profile'}>
+            <DropdownMenu email={email} name={name} variant={'profile-page'}>
               <Image
                 height={36}
                 src={'https://sunmag.me/wp-content/uploads/2019/11/sunmag-005-small-avatar.png'}
