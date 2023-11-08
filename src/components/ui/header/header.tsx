@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
 
+import { Logo } from '@/assets'
 import { Button, Typography } from '@/components'
 import { DropdownMenu } from '@/components/ui/dropdown-menu'
 import { Image } from '@/components/ui/image'
@@ -20,7 +21,9 @@ export const Header = ({
     <div className={s.header}>
       <div className={s.container}>
         <Typography className={s.logo} variant={'h2'}>
-          Cards
+          <Button as={NavLink} to={'/'} variant={'link'}>
+            <Logo />
+          </Button>
         </Typography>
         {isAuth ? (
           <div className={s.info}>

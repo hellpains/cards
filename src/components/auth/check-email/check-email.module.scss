@@ -1,10 +1,9 @@
 .checkEmail {
   width: 420px;
-  margin: auto;
 
   .container {
     width: 348px;
-    margin: 0 auto;
+    margin: auto;
     color: var(--color-light-100);
 
     .title {
@@ -24,12 +23,16 @@
       text-align: center;
     }
 
+    .buttonWrapper {
+      margin-top: 65px;
+      padding-bottom: 44px;
+    }
+
     .button {
       display: block;
 
-      margin: 65px 0 44px;
-
       text-align: center;
+      text-decoration: none;
 
       border-radius: 4px;
       box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);

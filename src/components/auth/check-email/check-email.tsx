@@ -18,9 +18,11 @@ export const CheckEmail = () => {
         <Typography as={'div'} className={s.text} variant={'body2'}>
           We’ve sent an Email with instructions to example@mail.com
         </Typography>
-        <Button as={NavLink} className={s.button} fullWidth to={'/sign-in'}>
-          Back to Sign In
-        </Button>
+        <div className={s.buttonWrapper}>
+          <Button as={NavLink} className={s.button} fullWidth to={'/sign-in'}>
+            Back to Sign In
+          </Button>
+        </div>
       </div>
     </Card>
   )
