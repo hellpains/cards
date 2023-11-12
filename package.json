@@ -25,6 +25,7 @@
     "@reduxjs/toolkit": "^1.9.7",
     "@types/lodash": "^4.14.199",
     "@types/react-redux": "^7.1.28",
+    "async-mutex": "^0.4.0",
     "axios": "^1.5.1",
     "clsx": "^2.0.0",
     "lodash": "^4.17.21",

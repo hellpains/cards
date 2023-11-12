@@ -1,30 +1,40 @@
 import { ReactNode } from 'react'
 
+import { Typography } from '@/components'
 import * as Tabs from '@radix-ui/react-tabs'
 
 import s from './tab-switcher.module.scss'
 
 export type TabSwitcherPropsType = {
-  children?: ReactNode
+  changeValue: (value: any) => void
+  children: ReactNode
+  defaultValue: string
   disabled?: boolean
-  tabs: { title: string; value: string }[]
+  label?: string
 }
 
 export const TabSwitcher = (props: TabSwitcherPropsType) => {
-  const { children, disabled, tabs } = props
+  const { changeValue, children, label } = props
 
   return (
-    <Tabs.Root className={s.root} defaultValue={'2'}>
-      <Tabs.List className={s.list}>
-        {tabs.map(tab => {
-          return (
-            <Tabs.Trigger className={s.item} disabled={disabled} key={tab.value} value={tab.value}>
-              {tab.title}
-            </Tabs.Trigger>
-          )
-        })}
-      </Tabs.List>
-      {children}
+    <Tabs.Root className={s.root} defaultValue={'allDecks'} onValueChange={changeValue}>
+      <Typography as={'label'} className={s.label} variant={'body2'}>
+        {label}
+      </Typography>
+      <Tabs.List className={s.list}>{children}</Tabs.List>
     </Tabs.Root>
+  )
+}
+
+type TabTriggerProps = {
+  title: string
+  value: string
+}
+
+export const TabTrigger = ({ title, value }: TabTriggerProps) => {
+  return (
+    <Tabs.Trigger className={s.item} value={value}>
+      {title}
+    </Tabs.Trigger>
   )
 }

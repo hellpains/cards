@@ -8,15 +8,28 @@ import s from './Modal.module.scss'
 
 export type ModalPropsType = {
   children: ReactNode
+  confirmText: string
+  dontShowTrigger?: boolean
+  handleCancel: any
+  handleConfirm: any
   open: boolean
   setOpen: (open: boolean) => void
   title?: string
 } & Omit<ComponentPropsWithoutRef<typeof RadixDialog.Dialog>, 'onOpenChange' | 'open'>
-export const Modal = ({ children, setOpen, title, ...props }: ModalPropsType) => {
+export const Modal = ({
+  children,
+  confirmText,
+  dontShowTrigger,
+  handleCancel,
+  handleConfirm,
+  setOpen,
+  title,
+  ...props
+}: ModalPropsType) => {
   return (
     <RadixDialog.Root {...props}>
       <RadixDialog.Trigger className={s.trigger}>
-        <Button onClick={() => setOpen(true)}>hello</Button>
+        {!dontShowTrigger && <Button onClick={() => setOpen(true)}>{title}</Button>}
       </RadixDialog.Trigger>
       <RadixDialog.Portal>
         <RadixDialog.Overlay className={s.overlay} />
@@ -32,6 +45,12 @@ export const Modal = ({ children, setOpen, title, ...props }: ModalPropsType) =>
             </RadixDialog.Close>
           </div>
           {children}
+          <div className={s.buttons}>
+            <Button onClick={handleCancel} variant={'secondary'}>
+              Cancel
+            </Button>
+            <Button onClick={handleConfirm}>{confirmText}</Button>
+          </div>
         </RadixDialog.Content>
       </RadixDialog.Portal>
     </RadixDialog.Root>

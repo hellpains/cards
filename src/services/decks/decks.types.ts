@@ -28,3 +28,34 @@ export type Deck = {
   updated: string
   userId: string
 }
+
+export type CreateDeckBody = {
+  cover?: any
+  isPrivate: boolean
+  name: string
+}
+export type CreateDeckResponse = {
+  author: Author
+  cardsCount: number
+  cover: string
+  created: string
+  id: string
+  isPrivate: boolean
+  name: string
+  rating: number
+  shots: number
+  updated: string
+  userId: string
+}
+
+export type GetDecksParams = {
+  authorId?: string
+  currentPage?: number
+  itemsPerPage?: number
+  maxCardsCount?: string
+  minCardsCount?: string
+  name?: string
+  orderBy?: 'asc' | 'desc'
+}
+
+export type TabType = 'allDecks' | 'myDecks'

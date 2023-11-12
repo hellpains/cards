@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Delete, Edit, Logout, Person, Play } from '@/assets'
 import { Typography } from '@/components'
@@ -9,10 +10,19 @@ import s from './dropdown-menu.module.scss'
 type DropdownMenuProps = {
   children?: ReactNode
   email?: string
+  handlerLogout: () => void
   name?: string
   variant?: 'edit' | 'profile-page'
 }
-export const DropdownMenu = ({ children, email, name, variant }: DropdownMenuProps) => {
+export const DropdownMenu = ({
+  children,
+  email,
+  handlerLogout,
+  name,
+  variant,
+}: DropdownMenuProps) => {
+  const navigate = useNavigate()
+
   return (
     <RadixDropdownMenu.Root>
       <RadixDropdownMenu.Trigger className={s.trigger}>{children}</RadixDropdownMenu.Trigger>
@@ -38,13 +48,18 @@ export const DropdownMenu = ({ children, email, name, variant }: DropdownMenuPro
                 </div>
               </div>
               <RadixDropdownMenu.Separator className={s.separator} />
-              <div className={s.profile}>
+              <button
+                className={s.profile}
+                onClick={() => {
+                  navigate('/profile')
+                }}
+              >
                 <Person /> <Typography variant={'caption'}>My Profile</Typography>
-              </div>
+              </button>
               <RadixDropdownMenu.Separator className={s.separator} />
-              <div className={s.logout}>
+              <button className={s.logout} onClick={handlerLogout}>
                 <Logout /> <Typography variant={'caption'}>Log Out</Typography>
-              </div>
+              </button>
             </div>
           </RadixDropdownMenu.Content>
         ) : (

@@ -6,7 +6,7 @@ import s from './table.module.scss'
 
 export const Table = forwardRef<HTMLTableElement, ComponentPropsWithoutRef<'table'>>(
   ({ className, ...rest }, ref) => {
-    return <table {...rest} className={s.table} ref={ref} />
+    return <table {...rest} className={`${s.table} ${className}`} ref={ref} />
   }
 )
 

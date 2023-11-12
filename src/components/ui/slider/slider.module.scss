@@ -60,11 +60,17 @@
   width: 36px;
   height: 36px;
 
-  border: 1px solid var(--dark-300);
+  border: 1px solid var(--color-dark-300);
   border-radius: 2px;
 }
 
 .slider {
+  position: relative;
   display: flex;
   align-items: center;
+
+  .label {
+    position: absolute;
+    top: -30px;
+  }
 }

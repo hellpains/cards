@@ -10,4 +10,6 @@ export * from './textField'
 export * from './radioGroup'
 export * from './modal'
 export * from './checkBox'
+export * from './table'
+
 export * from './header'

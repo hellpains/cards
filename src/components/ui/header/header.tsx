@@ -1,22 +1,27 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import { Logo } from '@/assets'
 import { Button, Typography } from '@/components'
 import { DropdownMenu } from '@/components/ui/dropdown-menu'
 import { Image } from '@/components/ui/image'
+import { useLogoutMutation, useMeQuery } from '@/services/auth'
 
 import s from './header.module.scss'
 
-type HeaderProps = {
-  email?: string
-  isAuth?: boolean
-  name?: string
-}
-export const Header = ({
-  email = 'rustam2004sadulaev@mail.ru',
-  isAuth = true,
-  name = 'hellpains',
-}: HeaderProps) => {
+type HeaderProps = {}
+export const Header = ({}: HeaderProps) => {
+  const [logout] = useLogoutMutation()
+  const navigate = useNavigate()
+  const { data, isError } = useMeQuery()
+  const handlerLogout = async () => {
+    try {
+      await logout()
+      navigate('/sign-in')
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   return (
     <div className={s.header}>
       <div className={s.container}>
@@ -25,13 +30,21 @@ export const Header = ({
             <Logo />
           </Button>
         </Typography>
-        {isAuth ? (
+        {!isError ? (
           <div className={s.info}>
-            <Typography className={s.name}>{name}</Typography>
-            <DropdownMenu email={email} name={name} variant={'profile-page'}>
+            <Typography className={s.name}>{data?.name}</Typography>
+            <DropdownMenu
+              email={data?.email}
+              handlerLogout={handlerLogout}
+              name={data?.name}
+              variant={'profile-page'}
+            >
               <Image
                 height={36}
-                src={'https://sunmag.me/wp-content/uploads/2019/11/sunmag-005-small-avatar.png'}
+                src={
+                  data?.avatar ??
+                  'https://sunmag.me/wp-content/uploads/2019/11/sunmag-005-small-avatar.png'
+                }
                 width={36}
               />
             </DropdownMenu>

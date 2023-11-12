@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 
 import { Close, ClosedEye, Eye, Search } from '@/assets'
 import { Label, Typography } from '@/components'
@@ -9,12 +9,17 @@ export type TextFieldPropsType = {
   className?: string
   error?: null | string
   label?: string
+  onValueChange?: (value: string) => void
   password?: boolean
   search?: boolean
 } & ComponentPropsWithoutRef<'input'>
 export const TextField = forwardRef<HTMLInputElement, TextFieldPropsType>(
-  ({ className, error, label, password, search, ...rest }, ref) => {
+  ({ className, error, label, onValueChange, password, search, ...rest }, ref) => {
     const [passwordVisible, setPasswordVisible] = useState(true)
+
+    const onValueChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+      onValueChange && onValueChange(e.currentTarget.value)
+    }
 
     return (
       <div className={`${s.textField} ${className}`}>
@@ -29,6 +34,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldPropsType>(
             className={`${search ? s.searchInput : ''} ${password ? s.passwordInput : ''} ${
               error ? s.error : ''
             }`}
+            onChange={onValueChangeHandler}
             ref={ref}
             type={password && passwordVisible ? 'password' : 'text'}
             {...rest}

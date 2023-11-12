@@ -6,8 +6,9 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
-import { ForgotPasswordPage, SignInPage, SignUpPage } from './pages'
-import { ProfilePage } from './pages/profile-page/profile-page'
+import { useMeQuery } from '@/services/auth'
+
+import { DecksPage, ForgotPasswordPage, ProfilePage, SignInPage, SignUpPage } from './pages'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -30,7 +31,7 @@ const publicRoutes: RouteObject[] = [
 ]
 const privateRoutes: RouteObject[] = [
   {
-    element: <div>DecksPage</div>, // <DecksPage/>
+    element: <DecksPage />, // <DecksPage/>
     path: '/',
   },
   {
@@ -60,7 +61,13 @@ export const Router = () => {
 }
 
 function PrivateRoutes() {
-  const isAuthenticated = true
+  const { isError, isLoading } = useMeQuery()
 
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
+  if (isLoading) {
+    return null
+  }
+
+  const isAuthenticated = !isError
+
+  return isAuthenticated ? <Outlet /> : <Navigate to={'/sign-in'} />
 }
