@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    setValue: () => {},
-    value: [3, 6],
+    label: 'Slider',
+    value: [12, 76],
   },
 }

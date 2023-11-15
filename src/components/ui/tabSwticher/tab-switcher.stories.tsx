@@ -12,24 +12,18 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const tabs = [
-  { title: 'Switcher', value: '1' },
-  { title: 'Switcher', value: '2' },
-  { title: 'Switcher', value: '3' },
-  { title: 'Switcher', value: '4' },
-  { title: 'Switcher', value: '5' },
-]
-
 export const Default: Story = {
   args: {
+    children: 'hello',
+    defaultValue: 'all',
     disabled: false,
-    tabs: tabs,
+    label: 'Swither',
   },
 }
 
-export const Disabled: Story = {
-  args: {
-    disabled: true,
-    tabs: tabs,
-  },
-}
+// export const Disabled: Story = {
+//   args: {
+//     disabled: true,
+//     tabs: tabs,
+//   },
+// }

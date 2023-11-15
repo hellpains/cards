@@ -6,7 +6,7 @@ import * as Tabs from '@radix-ui/react-tabs'
 import s from './tab-switcher.module.scss'
 
 export type TabSwitcherPropsType = {
-  changeValue: (value: any) => void
+  changeValue?: (value: any) => void
   children: ReactNode
   defaultValue: string
   disabled?: boolean

@@ -17,7 +17,6 @@ export const Default: Story = {
   args: {
     checked: true,
     label: 'check-box',
-    setChecked: () => {},
   },
 }
 
@@ -26,6 +25,5 @@ export const Disabled: Story = {
     checked: true,
     disabled: true,
     label: 'check-box',
-    setChecked: () => {},
   },
 }
