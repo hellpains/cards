@@ -1,17 +1,36 @@
-import { CreateDeckBody, CreateDeckResponse, DecksResponse, GetDecksParams } from '@/services'
+import { CreateDeckBody, Deck, DecksResponse, GetDecksParams, RootState } from '@/services'
 import { baseApi } from '@/services/base-api'
 
 export const decksService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      createDeck: builder.mutation<CreateDeckBody, CreateDeckResponse>({
+      createDeck: builder.mutation<Deck, CreateDeckBody>({
         invalidatesTags: ['Decks'],
-        onQueryStarted: async (_, { dispatch, getCacheEntry, getState, queryFulfilled }) => {
-          const data = getCacheEntry()
-          const state = getState()
+        onQueryStarted: async (_, { dispatch, getState, queryFulfilled }) => {
+          const state = getState() as RootState
+          const perPage = state.decks.perPage
+          const currentPage = state.decks.currentPage
+          const minCards = state.decks.minCards
+          const maxCards = state.decks.maxCards
+          const search = state.decks.search
 
-          decksService.util.resetApiState
-          await queryFulfilled
+          const res = await queryFulfilled
+
+          dispatch(
+            decksService.util.updateQueryData(
+              `getDecks`,
+              {
+                currentPage,
+                itemsPerPage: perPage,
+                maxCardsCount: maxCards,
+                minCardsCount: minCards,
+                name: search,
+              },
+              draft => {
+                draft.items.unshift(res.data)
+              }
+            )
+          )
         },
         query: body => ({
           body,
@@ -26,7 +45,9 @@ export const decksService = baseApi.injectEndpoints({
           url: `v1/decks/${id}`,
         }),
       }),
-      // }),
+      getCardsByDeck: builder.query<any, string>({
+        query: id => `v1/decks/${id}/cards`,
+      }),
       getDecks: builder.query<DecksResponse, GetDecksParams>({
         providesTags: ['Decks'],
         query: params => {
@@ -36,8 +57,42 @@ export const decksService = baseApi.injectEndpoints({
           }
         },
       }),
-      updateDeck: builder.mutation<any, any>({
+      updateDeck: builder.mutation<Deck, { body: CreateDeckBody; id: string }>({
         invalidatesTags: ['Decks'],
+        onQueryStarted: async ({ id, ...body }, { dispatch, getState, queryFulfilled }) => {
+          const state = getState() as RootState
+          const perPage = state.decks.perPage
+          const currentPage = state.decks.currentPage
+          const minCards = state.decks.minCards
+          const maxCards = state.decks.maxCards
+          const search = state.decks.search
+
+          dispatch(
+            decksService.util.updateQueryData(
+              `getDecks`,
+              {
+                currentPage,
+                itemsPerPage: perPage,
+                maxCardsCount: maxCards,
+                minCardsCount: minCards,
+                name: search,
+              },
+              draft => {
+                const deck = draft.items.find(deck => deck.id === id)
+
+                console.log('draft')
+                if (deck) {
+                  Object.assign(deck, {
+                    ...deck,
+                    ...body,
+                  })
+                }
+              }
+            )
+          )
+
+          await queryFulfilled
+        },
         query: ({ id, ...body }) => ({
           body,
           method: 'PATCH',
@@ -51,6 +106,7 @@ export const decksService = baseApi.injectEndpoints({
 export const {
   useCreateDeckMutation,
   useDeleteDeckMutation,
+  useGetCardsByDeckQuery,
   useGetDecksQuery,
   useUpdateDeckMutation,
 } = decksService

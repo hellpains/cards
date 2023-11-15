@@ -13,3 +13,19 @@ export type LoginArgs = {
   password: string
   rememberMe?: boolean
 }
+
+export type UpdateUserResponse = {
+  avatar: string
+  created: string
+  email: string
+  id: string
+  isEmailVerified: boolean
+  name: string
+  updated: string
+}
+
+export type UpdateUserBody = {
+  avatar?: File
+  email?: string
+  name?: string
+}

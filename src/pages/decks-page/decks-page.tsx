@@ -40,19 +40,26 @@ export const DecksPage = () => {
   const showEditModal = !!deckToEditId
   const { data: me } = useMeQuery()
   const dispatch = useAppDispatch()
-  const currentPage = useAppSelector<any>(state => state.decks.currentPage)
-  const perPage = useAppSelector<any>(state => state.decks.perPage)
+  const currentPage = useAppSelector(state => state.decks.currentPage)
+  const perPage = useAppSelector(state => state.decks.perPage)
   const currentTab = useAppSelector<TabType>(state => state.decks.currentTab)
-  const search = useAppSelector<any>(state => state.decks.search)
-  const minCards = useAppSelector<any>(state => state.decks.minCards)
-  const maxCards = useAppSelector<any>(state => state.decks.maxCards)
+  const search = useAppSelector(state => state.decks.search)
+  const minCards = useAppSelector(state => state.decks.minCards)
+  const maxCards = useAppSelector(state => state.decks.maxCards)
   const setPage = (page: number) => dispatch(decksSlice.actions.setPerPage(page))
   const setMinCards = (minCards: number) => dispatch(decksSlice.actions.setMinCards(minCards))
   const setMaxCards = (maxCards: number) => dispatch(decksSlice.actions.setMaxCards(maxCards))
-  const [rangeValue, setRangeValue] = useState([minCards, maxCards])
   let onSearch = (search: string) => {
     dispatch(decksSlice.actions.setSearch(search))
   }
+  const { currentData: currentDecksData, data: decksData } = useGetDecksQuery({
+    currentPage: currentPage,
+    itemsPerPage: perPage,
+    maxCardsCount: maxCards,
+    minCardsCount: minCards,
+    name: search,
+  })
+  const [rangeValue, setRangeValue] = useState([minCards, maxCards])
 
   const [createDeck] = useCreateDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
@@ -63,6 +70,7 @@ export const DecksPage = () => {
     setMinCards(value[0])
     setMaxCards(value[1])
   }
+
   const clearFilter = () => {
     dispatch(decksSlice.actions.resetFilters())
   }
@@ -73,14 +81,7 @@ export const DecksPage = () => {
     navigate(`/decks/${deckId}`)
   }
 
-  const { data: decks } = useGetDecksQuery({
-    currentPage: currentPage,
-
-    itemsPerPage: perPage,
-    maxCardsCount: maxCards,
-    minCardsCount: minCards,
-    name: search,
-  })
+  const decks = currentDecksData ?? decksData
   const showConfirmDeleteModal = !!deckToDeleteId
   const deckToDeleteName = decks?.items?.find(deck => deck.id === deckToDeleteId)?.name
   const deckToEdit = decks?.items?.find(deck => deck.id === deckToEditId)
@@ -114,7 +115,8 @@ export const DecksPage = () => {
           </TabSwitcher>
 
           <Slider
-            max={decks?.maxCardsCount}
+            label={'Slider'}
+            max={decks?.maxCardsCount || 0}
             min={0}
             onValueChange={setRangeValue}
             onValueCommit={setSlider}
