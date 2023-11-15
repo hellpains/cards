@@ -32,18 +32,21 @@ type DecksProps = {
   authorId?: string
   currentTab: TabType
   decks: Deck[]
-  onDeleteClick: any
-  onEditClick: any
+  learnDeck: (deckId: string) => void
+  onDeleteClick: (id: string) => void
+  onEditClick: (id: string) => void
 }
 export const DecksTable = ({
   authorId,
   currentTab,
   decks,
+  learnDeck,
   onDeleteClick,
   onEditClick,
 }: DecksProps) => {
   const handleEditClick = (id: string) => () => onEditClick(id)
   const handleDeleteClick = (id: string) => () => onDeleteClick(id)
+  const handleLearnDeck = (deckId: string) => () => learnDeck(deckId)
 
   // const handleDeleteClick = (id: string) => () => onDeleteClick(id)
   let myDecks = decks
@@ -64,7 +67,7 @@ export const DecksTable = ({
               <TableCell>{formatDate(deck.updated)}</TableCell>
               <TableCell>{deck.author.name}</TableCell>
               <TableCell className={s.actions}>
-                <button>
+                <button onClick={handleLearnDeck(deck.id)}>
                   <Play />
                 </button>
                 {deck.author.id === authorId && (

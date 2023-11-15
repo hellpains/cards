@@ -1,0 +1,36 @@
+.container {
+  width: 1008px;
+  margin: 0 auto;
+
+  .backLink {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+    margin: 24px 0 33px;
+
+    text-decoration: none;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 27px;
+  }
+
+  .input {
+    margin-bottom: 24px;
+  }
+
+  .text {
+    display: flex;
+    justify-content: center;
+    margin: 70px 0 30px;
+    color: var(--color-dark-100);
+  }
+
+  .button {
+    display: flex;
+    justify-content: center;
+  }
+}

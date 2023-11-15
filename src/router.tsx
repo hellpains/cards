@@ -8,7 +8,14 @@ import {
 
 import { useMeQuery } from '@/services/auth'
 
-import { DecksPage, ForgotPasswordPage, ProfilePage, SignInPage, SignUpPage } from './pages'
+import {
+  DeckPage,
+  DecksPage,
+  ForgotPasswordPage,
+  ProfilePage,
+  SignInPage,
+  SignUpPage,
+} from './pages'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -35,7 +42,7 @@ const privateRoutes: RouteObject[] = [
     path: '/',
   },
   {
-    element: <div>DeckPage</div>, // <DeckPage/>
+    element: <DeckPage />,
     path: '/decks/:deckId',
   },
   {

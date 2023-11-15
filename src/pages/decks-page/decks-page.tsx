@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Trash } from '@/assets'
 import {
@@ -32,6 +33,7 @@ import { debounce } from '@/utils'
 import s from './decks-page.module.scss'
 
 export const DecksPage = () => {
+  const navigate = useNavigate()
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [deckToDeleteId, setDeckToDeleteId] = useState<null | string>(null)
   const [deckToEditId, setDeckToEditId] = useState<null | string>(null)
@@ -67,9 +69,13 @@ export const DecksPage = () => {
   const setCurrentTabHandler = (value: TabType) => {
     dispatch(decksSlice.actions.setCurrentTab(value))
   }
+  const learnDeck = (deckId: string) => {
+    navigate(`/decks/${deckId}`)
+  }
 
   const { data: decks } = useGetDecksQuery({
     currentPage: currentPage,
+
     itemsPerPage: perPage,
     maxCardsCount: maxCards,
     minCardsCount: minCards,
@@ -101,7 +107,7 @@ export const DecksPage = () => {
           <TabSwitcher
             changeValue={setCurrentTabHandler}
             defaultValue={'allDecks'}
-            label={'Show packs cards'}
+            label={'Show packs deck'}
           >
             <TabTrigger title={'My Decks'} value={'myDecks'} />
             <TabTrigger title={'All Decks'} value={'allDecks'} />
@@ -123,6 +129,7 @@ export const DecksPage = () => {
           authorId={me?.id}
           currentTab={currentTab}
           decks={decks?.items}
+          learnDeck={learnDeck}
           onDeleteClick={setDeckToDeleteId}
           onEditClick={setDeckToEditId}
         />

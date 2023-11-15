@@ -31,8 +31,8 @@ export type Deck = {
 
 export type CreateDeckBody = {
   cover?: any
-  isPrivate: boolean
-  name: string
+  isPrivate?: boolean
+  name?: string
 }
 export type CreateDeckResponse = {
   author: Author
@@ -52,8 +52,8 @@ export type GetDecksParams = {
   authorId?: string
   currentPage?: number
   itemsPerPage?: number
-  maxCardsCount?: string
-  minCardsCount?: string
+  maxCardsCount?: any
+  minCardsCount?: any
   name?: string
   orderBy?: 'asc' | 'desc'
 }

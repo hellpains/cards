@@ -1,5 +1,6 @@
 import { Column, Table, TableBody, TableCell, TableHeader, TableRow } from '@/components'
-import { GetCardsResponse } from '@/services/cards/cards.types'
+import { GetDeckResponse } from '@/services/deck/deck.types'
+import { formatDate } from '@/utils'
 
 import s from './deck.module.scss'
 
@@ -23,23 +24,25 @@ const columns: Column[] = [
 ]
 
 type DeckProps = {
-  cards: GetCardsResponse[]
+  cards: GetDeckResponse[]
 }
 export const Deck = ({ cards }: DeckProps) => {
   return (
     <Table className={s.deck}>
       <TableHeader columns={columns} />
       <TableBody>
-        {cards.map(card => {
-          return (
-            <TableRow key={card.id}>
-              <TableCell>{card.question}</TableCell>
-              <TableCell>{card.answer}</TableCell>
-              <TableCell>{card.updated}</TableCell>
-              <TableCell>{card.rating}</TableCell>
-            </TableRow>
-          )
-        })}
+        {cards?.length
+          ? cards?.map(card => {
+              return (
+                <TableRow key={card.id}>
+                  <TableCell>{card.question}</TableCell>
+                  <TableCell>{card.answer}</TableCell>
+                  <TableCell>{formatDate(card.updated)}</TableCell>
+                  <TableCell>{card.rating}</TableCell>
+                </TableRow>
+              )
+            })
+          : ''}
       </TableBody>
     </Table>
   )

@@ -1,4 +1,4 @@
-export type GetCardsResponse = {
+export type GetDeckResponse = {
   answer: string
   answerImg: string
   answerVideo: string
