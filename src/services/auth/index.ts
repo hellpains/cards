@@ -1,3 +1,3 @@
 export * from './auth.slice'
-export * from './authService.ts'
+export * from './authService'
 export * from './auth.types'

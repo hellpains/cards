@@ -8,11 +8,11 @@ import s from './Modal.module.scss'
 
 export type ModalPropsType = {
   children: ReactNode
-  confirmText: string
+  confirmText?: string
   dontShowTrigger?: boolean
-  handleCancel: any
-  handleConfirm: any
-  open: boolean
+  handleCancel?: any
+  handleConfirm?: any
+  open?: boolean
   setOpen: (open: boolean) => void
   title?: string
 } & Omit<ComponentPropsWithoutRef<typeof RadixDialog.Dialog>, 'onOpenChange' | 'open'>
