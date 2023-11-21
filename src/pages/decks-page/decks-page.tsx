@@ -28,7 +28,7 @@ import {
 } from '@/services'
 import { useMeQuery } from '@/services/auth'
 import { decksSlice } from '@/services/decks/decks.slice'
-import { debounce } from '@/utils'
+import { useDebounce } from '@/utils/hooks'
 
 import s from './decks-page.module.scss'
 
@@ -50,16 +50,17 @@ export const DecksPage = () => {
   const setMinCards = (minCards: number) => dispatch(decksSlice.actions.setMinCards(minCards))
   const setMaxCards = (maxCards: number) => dispatch(decksSlice.actions.setMaxCards(maxCards))
   const setPerPage = (perPage: number) => dispatch(decksSlice.actions.setPerPage(perPage))
-  let onSearch = (search: string) => {
-    dispatch(decksSlice.actions.setSearch(search))
+  const onSearch = (value: string) => {
+    dispatch(decksSlice.actions.setSearch(value))
   }
+  const debouncedSearch = useDebounce(search, 500)
   const { currentData: currentDecksData, data: decksData } = useGetDecksQuery({
     authorId: currentTab === 'myDecks' ? me?.id : undefined,
     currentPage: currentPage,
     itemsPerPage: perPage,
     maxCardsCount: maxCards,
     minCardsCount: minCards,
-    name: search,
+    name: debouncedSearch,
   })
   const [rangeValue, setRangeValue] = useState([minCards, maxCards])
 
@@ -67,7 +68,6 @@ export const DecksPage = () => {
   const [updateDeck] = useUpdateDeckMutation()
   const [deleteDeck] = useDeleteDeckMutation()
 
-  onSearch = debounce(onSearch, 500)
   const setSlider = (value: number[]) => {
     setMinCards(value[0])
     setMaxCards(value[1])
@@ -91,13 +91,13 @@ export const DecksPage = () => {
     decksForTable = decksForTable?.filter(d => d.author.id === me?.id)
   }
   const clearFilter = () => {
+    setRangeValue([0])
     dispatch(decksSlice.actions.resetFilters())
   }
 
-  if (!decks) {
+  if (!decksData) {
     return <Loader />
   }
-  console.log(currentTab)
 
   return (
     <div className={s.decks}>
@@ -113,7 +113,14 @@ export const DecksPage = () => {
           />
         </div>
         <div className={s.decks__filter}>
-          <TextField className={s.input} onValueChange={onSearch} placeholder={'Search'} search />
+          <TextField
+            className={s.input}
+            onResetValue={() => onSearch('')}
+            onValueChange={onSearch}
+            placeholder={'Search'}
+            search
+            value={search}
+          />
           <TabSwitcher
             changeValue={setCurrentTabHandler}
             label={'Show packs deck'}

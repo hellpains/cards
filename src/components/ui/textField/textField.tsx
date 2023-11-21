@@ -9,12 +9,13 @@ export type TextFieldPropsType = {
   className?: string
   error?: null | string
   label?: string
+  onResetValue?: (value: string) => void
   onValueChange?: (value: string) => void
   password?: boolean
   search?: boolean
 } & ComponentPropsWithoutRef<'input'>
 export const TextField = forwardRef<HTMLInputElement, TextFieldPropsType>(
-  ({ className, error, label, onValueChange, password, search, ...rest }, ref) => {
+  ({ className, error, label, onResetValue, onValueChange, password, search, ...rest }, ref) => {
     const [passwordVisible, setPasswordVisible] = useState(true)
 
     const onValueChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -51,14 +52,10 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldPropsType>(
           )}
 
           {search && rest.value && (
-            <div
-              className={s.close}
-              onClick={() => {
-                // rest.onChange('')
-              }}
-            >
+            // @ts-ignore
+            <button className={s.close} onClick={onResetValue}>
               <Close />
-            </div>
+            </button>
           )}
           {error && <Typography className={s.error}>{error}</Typography>}
         </div>

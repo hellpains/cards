@@ -1,6 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 
-import { Logo } from '@/assets'
 import { Button, Typography } from '@/components'
 import { DropdownMenu } from '@/components/ui/dropdown-menu'
 import { Image } from '@/components/ui/image'
@@ -26,11 +25,11 @@ export const Header = ({}: HeaderProps) => {
   return (
     <div className={s.header}>
       <div className={s.container}>
-        <Typography className={s.logo} variant={'h2'}>
-          <Button as={NavLink} to={'/'} variant={'link'}>
-            <Logo />
-          </Button>
-        </Typography>
+        <NavLink className={s.logo} to={'/'}>
+          <Typography className={s.logoText} variant={'h2'}>
+            Quizlet
+          </Typography>
+        </NavLink>
         {!isError ? (
           <div className={s.info}>
             <NavLink style={{ textDecoration: 'none' }} to={'/profile'}>

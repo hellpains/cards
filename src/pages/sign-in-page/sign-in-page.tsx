@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 
 import { Header, SignIn } from '@/components'
-import { LoginArgs, useLoginMutation } from '@/services/auth'
+import { LoginArgs, useLoginMutation, useMeQuery } from '@/services/auth'
 
 export const SignInPage = () => {
-  const [login] = useLoginMutation()
   const navigate = useNavigate()
+  const { isError } = useMeQuery()
+  const [login] = useLoginMutation()
 
   const handleLogin = async (args: LoginArgs) => {
     try {
@@ -14,6 +15,10 @@ export const SignInPage = () => {
     } catch (err) {
       console.error(err)
     }
+  }
+
+  if (!isError) {
+    navigate('/')
   }
 
   return (

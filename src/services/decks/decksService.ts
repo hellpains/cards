@@ -80,7 +80,6 @@ export const decksService = baseApi.injectEndpoints({
               draft => {
                 const deck = draft.items.find(deck => deck.id === id)
 
-                console.log('draft')
                 if (deck) {
                   Object.assign(deck, {
                     ...deck,

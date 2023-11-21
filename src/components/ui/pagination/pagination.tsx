@@ -15,27 +15,6 @@ type PaginationPropsType = {
   totalPage: number
 }
 
-const changePage = (
-  value: number | string,
-  totalPage: number,
-  setPage: (page: number) => void,
-  currentPage: number
-) => {
-  if (value === 'prevValue') {
-    if (currentPage !== 1) {
-      setPage(currentPage - 1)
-    }
-  } else if (value === 'nextValue') {
-    if (currentPage !== totalPage) {
-      setPage(currentPage + 1)
-    }
-  } else if (value === '...') {
-    return
-  } else {
-    setPage(+value)
-  }
-}
-
 export const Pagination = (props: PaginationPropsType) => {
   const { limit, page, setLimit, setPage, totalPage } = props
   const dispatch = useAppDispatch()
@@ -120,4 +99,25 @@ export const Pagination = (props: PaginationPropsType) => {
       </div>
     </div>
   )
+}
+
+const changePage = (
+  value: number | string,
+  totalPage: number,
+  setPage: (page: number) => void,
+  currentPage: number
+) => {
+  if (value === 'prevValue') {
+    if (currentPage !== 1) {
+      setPage(currentPage - 1)
+    }
+  } else if (value === 'nextValue') {
+    if (currentPage !== totalPage) {
+      setPage(currentPage + 1)
+    }
+  } else if (value === '...') {
+    return
+  } else {
+    setPage(+value)
+  }
 }
