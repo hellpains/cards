@@ -29,7 +29,7 @@ export const usePagination = (totalPage: number, page: number, siblings: number)
 }
 
 const range = (start: number, end: number) => {
-  const length = end - start + 1
+  const length = end - start
 
   return Array.from({ length }, (_, idx) => idx + start)
 }

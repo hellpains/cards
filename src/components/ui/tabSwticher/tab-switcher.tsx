@@ -8,14 +8,13 @@ import s from './tab-switcher.module.scss'
 export type TabSwitcherPropsType = {
   changeValue?: (value: any) => void
   children: ReactNode
-  defaultValue?: string
   disabled?: boolean
   label?: string
   value?: string
 }
 
 export const TabSwitcher = (props: TabSwitcherPropsType) => {
-  const { changeValue, children, defaultValue, label, value } = props
+  const { changeValue, children, label, value } = props
 
   return (
     <Tabs.Root className={s.root} onValueChange={changeValue} value={value}>

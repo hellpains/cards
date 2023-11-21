@@ -50,7 +50,7 @@ export const Pagination = (props: PaginationPropsType) => {
     dispatch(decksSlice.actions.setCurrentPage)
     pageNo = page
   }
-  const array = usePagination(totalPage, pageNo, 2)
+  const array = usePagination(totalPage, pageNo, 1)
 
   const classnames = {
     activeNumber(value: number | string) {
