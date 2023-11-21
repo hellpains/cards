@@ -7,7 +7,7 @@ export const decksSlice = createSlice({
     currentTab: 'allDecks' as TabType,
     maxCards: undefined as number | undefined,
     minCards: 0,
-    perPage: 10,
+    perPage: 5,
     search: '',
   },
   name: 'decks',

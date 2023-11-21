@@ -34,3 +34,13 @@
     justify-content: center;
   }
 }
+
+.deckNameAndOptions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  .options {
+  }
+}

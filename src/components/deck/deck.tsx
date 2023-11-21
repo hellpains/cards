@@ -4,25 +4,6 @@ import { formatDate } from '@/utils'
 
 import s from './deck.module.scss'
 
-const columns: Column[] = [
-  {
-    key: 'question',
-    title: 'Question',
-  },
-  {
-    key: 'answer',
-    title: 'Answer',
-  },
-  {
-    key: 'lastUpdated',
-    title: 'Last Updated',
-  },
-  {
-    key: 'grade',
-    title: 'Grade',
-  },
-]
-
 type DeckProps = {
   cards: GetDeckResponse[]
 }
@@ -47,3 +28,22 @@ export const Deck = ({ cards }: DeckProps) => {
     </Table>
   )
 }
+
+const columns: Column[] = [
+  {
+    key: 'question',
+    title: 'Question',
+  },
+  {
+    key: 'answer',
+    title: 'Answer',
+  },
+  {
+    key: 'lastUpdated',
+    title: 'Last Updated',
+  },
+  {
+    key: 'grade',
+    title: 'Grade',
+  },
+]

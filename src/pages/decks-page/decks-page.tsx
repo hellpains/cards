@@ -41,18 +41,20 @@ export const DecksPage = () => {
   const { data: me } = useMeQuery()
   const dispatch = useAppDispatch()
   const currentPage = useAppSelector(state => state.decks.currentPage)
-  const perPage = useAppSelector(state => state.decks.perPage)
   const currentTab = useAppSelector<TabType>(state => state.decks.currentTab)
   const search = useAppSelector(state => state.decks.search)
   const minCards = useAppSelector(state => state.decks.minCards)
+  const perPage = useAppSelector(state => state.decks.perPage)
   const maxCards = useAppSelector(state => state.decks.maxCards)
-  const setPage = (page: number) => dispatch(decksSlice.actions.setPerPage(page))
+  const setPage = (page: number) => dispatch(decksSlice.actions.setCurrentPage(page))
   const setMinCards = (minCards: number) => dispatch(decksSlice.actions.setMinCards(minCards))
   const setMaxCards = (maxCards: number) => dispatch(decksSlice.actions.setMaxCards(maxCards))
+  const setPerPage = (perPage: number) => dispatch(decksSlice.actions.setPerPage(perPage))
   let onSearch = (search: string) => {
     dispatch(decksSlice.actions.setSearch(search))
   }
   const { currentData: currentDecksData, data: decksData } = useGetDecksQuery({
+    authorId: currentTab === 'myDecks' ? me?.id : undefined,
     currentPage: currentPage,
     itemsPerPage: perPage,
     maxCardsCount: maxCards,
@@ -71,9 +73,6 @@ export const DecksPage = () => {
     setMaxCards(value[1])
   }
 
-  const clearFilter = () => {
-    dispatch(decksSlice.actions.resetFilters())
-  }
   const setCurrentTabHandler = (value: TabType) => {
     dispatch(decksSlice.actions.setCurrentTab(value))
   }
@@ -81,10 +80,19 @@ export const DecksPage = () => {
     navigate(`/decks/${deckId}`)
   }
 
-  const decks = currentDecksData ?? decksData
+  const decks = currentDecksData && decksData
   const showConfirmDeleteModal = !!deckToDeleteId
   const deckToDeleteName = decks?.items?.find(deck => deck.id === deckToDeleteId)?.name
   const deckToEdit = decks?.items?.find(deck => deck.id === deckToEditId)
+
+  let decksForTable = decks?.items
+
+  if (currentTab === 'myDecks') {
+    decksForTable = decksForTable?.filter(d => d.author.id === me?.id)
+  }
+  const clearFilter = () => {
+    dispatch(decksSlice.actions.resetFilters())
+  }
 
   if (!decks) {
     return <Loader />
@@ -107,7 +115,7 @@ export const DecksPage = () => {
           <TextField className={s.input} onValueChange={onSearch} placeholder={'Search'} search />
           <TabSwitcher
             changeValue={setCurrentTabHandler}
-            defaultValue={'allDecks'}
+            defaultValue={currentTab}
             label={'Show packs deck'}
           >
             <TabTrigger title={'My Decks'} value={'myDecks'} />
@@ -116,7 +124,7 @@ export const DecksPage = () => {
 
           <Slider
             label={'Slider'}
-            max={decks?.maxCardsCount || 0}
+            max={decks?.maxCardsCount}
             min={0}
             onValueChange={setRangeValue}
             onValueCommit={setSlider}
@@ -127,20 +135,30 @@ export const DecksPage = () => {
           </Button>
         </div>
 
-        <DecksTable
-          authorId={me?.id}
-          currentTab={currentTab}
-          decks={decks?.items}
-          learnDeck={learnDeck}
-          onDeleteClick={setDeckToDeleteId}
-          onEditClick={setDeckToEditId}
-        />
-        <Pagination
-          limit={perPage}
-          page={currentPage}
-          setPage={setPage}
-          totalPage={decks.pagination.totalPages}
-        />
+        {decks?.items.length ? (
+          <>
+            <DecksTable
+              authorId={me?.id}
+              decks={decksForTable}
+              learnDeck={learnDeck}
+              onDeleteClick={setDeckToDeleteId}
+              onEditClick={setDeckToEditId}
+            />
+            {decks?.pagination.totalItems >= 6 && (
+              <Pagination
+                limit={perPage}
+                page={currentPage}
+                setLimit={setPerPage}
+                setPage={setPage}
+                totalPage={decks?.pagination?.totalPages}
+              />
+            )}
+          </>
+        ) : (
+          <Typography className={s.noContent} variant={'body1'}>
+            No content with these terms...
+          </Typography>
+        )}
       </div>
       <div>
         <UpdateDeckModal

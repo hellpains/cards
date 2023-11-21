@@ -13,6 +13,7 @@ export const Header = ({}: HeaderProps) => {
   const [logout] = useLogoutMutation()
   const navigate = useNavigate()
   const { data, isError } = useMeQuery()
+
   const handlerLogout = async () => {
     try {
       await logout()
@@ -32,7 +33,9 @@ export const Header = ({}: HeaderProps) => {
         </Typography>
         {!isError ? (
           <div className={s.info}>
-            <Typography className={s.name}>{data?.name}</Typography>
+            <NavLink style={{ textDecoration: 'none' }} to={'/profile'}>
+              <Typography className={s.name}>{data?.name}</Typography>
+            </NavLink>
             <DropdownMenu
               email={data?.email}
               handlerLogout={handlerLogout}
@@ -40,6 +43,7 @@ export const Header = ({}: HeaderProps) => {
               variant={'profile-page'}
             >
               <Image
+                className={s.avatar}
                 height={36}
                 src={
                   data?.avatar ??

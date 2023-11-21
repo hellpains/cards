@@ -52,9 +52,9 @@ export const PersonalInformation = () => {
               <Typography className={s.name} variant={'h1'}>
                 {user?.name}
               </Typography>
-              <div className={s.edit} onClick={() => setEdit(prev => !prev)}>
+              <Button className={s.edit} onClick={() => setEdit(prev => !prev)} variant={'icon'}>
                 <Edit />
-              </div>
+              </Button>
             </div>
             <Typography className={s.email} variant={'body2'}>
               {user?.email}

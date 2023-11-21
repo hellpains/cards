@@ -1,7 +1,6 @@
 import { ArrowLeft, ArrowRight } from '@/assets'
 import { Select } from '@/components'
-import { useAppDispatch, useAppSelector } from '@/services'
-import { decksSlice } from '@/services/decks/decks.slice'
+import { decksSlice, useAppDispatch } from '@/services'
 import { clsx } from 'clsx'
 
 import s from './pagination.module.scss'
@@ -9,8 +8,9 @@ import s from './pagination.module.scss'
 import { usePagination } from './usePagination'
 
 type PaginationPropsType = {
-  limit: any
+  limit: number
   page: number
+  setLimit?: (value: number) => void
   setPage: (page: number) => void
   totalPage: number
 }
@@ -18,58 +18,59 @@ type PaginationPropsType = {
 const changePage = (
   value: number | string,
   totalPage: number,
-  dispatch: any,
+  setPage: (page: number) => void,
   currentPage: number
 ) => {
   if (value === 'prevValue') {
     if (currentPage !== 1) {
-      dispatch(decksSlice.actions.setCurrentPage(currentPage - 1))
+      setPage(currentPage - 1)
     }
   } else if (value === 'nextValue') {
     if (currentPage !== totalPage) {
-      dispatch(decksSlice.actions.setCurrentPage(currentPage + 1))
+      setPage(currentPage + 1)
     }
   } else if (value === '...') {
     return
   } else {
-    dispatch(decksSlice.actions.setCurrentPage(+value))
+    setPage(+value)
   }
 }
 
 export const Pagination = (props: PaginationPropsType) => {
-  const currentPage = useAppSelector<any>(state => state.decks.currentPage)
-  const { limit, page, setPage, totalPage } = props
+  const { limit, page, setLimit, setPage, totalPage } = props
   const dispatch = useAppDispatch()
+
   let pageNo: number
 
   if (page <= totalPage) {
     pageNo = page
   } else {
+    debugger
     setPage(totalPage)
+    dispatch(decksSlice.actions.setCurrentPage)
     pageNo = page
   }
-
   const array = usePagination(totalPage, pageNo, 2)
 
   const classnames = {
-    pageNumber(value: number | string) {
-      return clsx(s.page, pageNo === value ? s.activeNumber : '')
+    activeNumber(value: number | string) {
+      return clsx(value !== '...' ? s.page : '', pageNo === value ? s.activeNumber : '')
     },
   }
-  const onChangeHandler = (value: number | string) => {
-    // dispatch(setCurrentPage(+value))
-    changePage(value, totalPage, dispatch, currentPage)
-  }
+
   const options = [
-    { title: '10', value: '10' },
-    { title: '20', value: '20' },
+    { title: '5', value: '5' },
+    { title: '7', value: '7' },
+    { title: '15', value: '15' },
     { title: '30', value: '30' },
     { title: '50', value: '50' },
-    { title: '100', value: '100' },
   ]
 
-  const setLimit = (value: string) => {
-    dispatch(decksSlice.actions.setPerPage(+value))
+  const onChangeHandler = (value: number | string) => {
+    changePage(value, totalPage, setPage, page)
+  }
+  const setLimitHandler = (value: string) => {
+    setLimit && setLimit(+value)
   }
 
   return (
@@ -82,7 +83,7 @@ export const Pagination = (props: PaginationPropsType) => {
           if (value === pageNo) {
             return (
               <div
-                className={classnames.pageNumber(value)}
+                className={classnames.activeNumber(value)}
                 key={index}
                 onClick={() => onChangeHandler(value)}
               >
@@ -92,7 +93,7 @@ export const Pagination = (props: PaginationPropsType) => {
           } else {
             return (
               <div
-                className={classnames.pageNumber(value)}
+                className={classnames.activeNumber(value)}
                 key={index}
                 onClick={() => onChangeHandler(value)}
               >
@@ -110,7 +111,7 @@ export const Pagination = (props: PaginationPropsType) => {
           <Select
             className={s.select}
             options={options}
-            setValue={setLimit}
+            setValue={setLimitHandler}
             value={String(limit)}
           />
         </div>

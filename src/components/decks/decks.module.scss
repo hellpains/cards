@@ -2,6 +2,20 @@
   margin: 36px 0;
 }
 
+.disabledLearnButton {
+  opacity: 0.5;
+}
+
+.deckName {
+  color: var(--color-light-100);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-accent-100);
+    text-decoration: underline;
+  }
+}
+
 .actions {
   display: flex;
   gap: 10px;

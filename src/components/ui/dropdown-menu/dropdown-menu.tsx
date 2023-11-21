@@ -9,14 +9,22 @@ import s from './dropdown-menu.module.scss'
 
 type DropdownMenuProps = {
   children?: ReactNode
+  className?: string
   email?: string
-  handlerLogout: () => void
+  handleDelete?: any
+  handleEdit?: any
+  handlePlay?: any
+  handlerLogout?: () => void
   name?: string
   variant?: 'edit' | 'profile-page'
 }
 export const DropdownMenu = ({
   children,
+  className,
   email,
+  handleDelete,
+  handleEdit,
+  handlePlay,
   handlerLogout,
   name,
   variant,
@@ -25,7 +33,9 @@ export const DropdownMenu = ({
 
   return (
     <RadixDropdownMenu.Root>
-      <RadixDropdownMenu.Trigger className={s.trigger}>{children}</RadixDropdownMenu.Trigger>
+      <RadixDropdownMenu.Trigger className={`s.trigger ${className}`}>
+        {children}
+      </RadixDropdownMenu.Trigger>
       <RadixDropdownMenu.Portal>
         {variant == 'profile-page' ? (
           <RadixDropdownMenu.Content
@@ -71,20 +81,20 @@ export const DropdownMenu = ({
           >
             <div className={s.arrow}></div>
             <div className={s.container}>
-              <div className={s.learn}>
+              <button className={s.learn} onClick={handlePlay}>
                 <Play />
                 <Typography variant={'caption'}>Learn</Typography>
-              </div>
+              </button>
               <RadixDropdownMenu.Separator className={s.separator} />
-              <div className={s.edit}>
+              <button className={s.edit} onClick={handleEdit}>
                 <Edit />
                 <Typography variant={'caption'}>Edit</Typography>
-              </div>
+              </button>
               <RadixDropdownMenu.Separator className={s.separator} />
-              <div className={s.delete}>
+              <button className={s.delete} onClick={handleDelete}>
                 <Delete />
                 <Typography variant={'caption'}>Delete</Typography>
-              </div>
+              </button>
             </div>
           </RadixDropdownMenu.Content>
         )}

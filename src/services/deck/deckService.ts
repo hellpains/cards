@@ -4,7 +4,7 @@ import { GetDeckResponse } from '@/services/deck/deck.types'
 export const deckService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      getDeck: builder.query<GetDeckResponse, string>({
+      getDeck: builder.query<GetDeckResponse, any>({
         providesTags: ['Cards'],
         query: id => `v1/cards/${id}`,
       }),

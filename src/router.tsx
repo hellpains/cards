@@ -6,8 +6,10 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { NewPasswordPage } from '@/pages/new-password-page'
 import { useMeQuery } from '@/services/auth'
 
+import { CheckEmail } from './components'
 import {
   DeckPage,
   DecksPage,
@@ -31,6 +33,14 @@ const publicRoutes: RouteObject[] = [
       {
         element: <ForgotPasswordPage />,
         path: '/forgot-password',
+      },
+      {
+        element: <CheckEmail />,
+        path: '/check-email',
+      },
+      {
+        element: <NewPasswordPage />,
+        path: '/new-password/:token',
       },
     ],
     element: <Outlet />,

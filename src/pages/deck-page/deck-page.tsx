@@ -1,26 +1,38 @@
-import { NavLink, useParams } from 'react-router-dom'
+import { useState } from 'react'
+import { NavLink, useNavigate, useParams } from 'react-router-dom'
 
-import { BigArrowLeft } from '@/assets'
-import { Button, Header, TextField, Typography } from '@/components'
+import { BigArrowLeft, MoreVertical } from '@/assets'
+import { Button, Header, TextField, Typography, UpdateDeckModal } from '@/components'
 import { Deck } from '@/components/deck/deck'
-import { useGetCardsByDeckQuery } from '@/services'
+import { DropdownMenu } from '@/components/ui/dropdown-menu'
+import {
+  useDeleteDeckMutation,
+  useGetCardsByDeckQuery,
+  useGetDecksQuery,
+  useUpdateDeckMutation,
+} from '@/services'
 import { useMeQuery } from '@/services/auth'
 
 import s from './deck-page.module.scss'
 
-// type DeckPageProps = {}
 export const DeckPage = () => {
-  const { data: me } = useMeQuery()
   const params = useParams()
-  const deckId = params.deckId
+  const navigate = useNavigate()
+  const [deckToEditId, setDeckToEditId] = useState<null | string>(null)
+  const showEditModal = !!deckToEditId
+  const deckId = params?.deckId
   const { data: cards } = useGetCardsByDeckQuery(deckId ?? '')
 
-  console.log(me?.id === cards?.userId)
-  console.log(me?.id)
-  console.log(cards)
-  // console.log(cards?.userId)
-  // console.log(cards)
-  // console.log(deckId)
+  const { data: me } = useMeQuery()
+  const { data } = useGetDecksQuery({})
+  const deck = data?.items.find(deck => deck.id === deckId)
+  const [handleDelete] = useDeleteDeckMutation()
+  const [handleEdit] = useUpdateDeckMutation()
+
+  const onDeckDelete = () => {
+    handleDelete(deckId ?? '')
+    navigate('/')
+  }
 
   return (
     <div className={s.cards}>
@@ -30,7 +42,19 @@ export const DeckPage = () => {
           <BigArrowLeft /> Back to Decks List
         </Button>
         <div className={s.header}>
-          <Typography variant={'large'}>Friends Deck</Typography>
+          <div className={s.deckNameAndOptions}>
+            <Typography variant={'large'}>{deck?.name}</Typography>
+            {deck?.author.id === me?.id && (
+              <DropdownMenu
+                className={s.options}
+                handleDelete={onDeckDelete}
+                handleEdit={setDeckToEditId}
+                handlePlay={() => {}}
+              >
+                <MoreVertical />
+              </DropdownMenu>
+            )}
+          </div>
           {!cards?.items?.length ?? <Button>Learn to Pack</Button>}
         </div>
 
@@ -50,6 +74,19 @@ export const DeckPage = () => {
           </div>
         )}
       </div>
+      <UpdateDeckModal
+        defaultValues={deck}
+        dontShowTrigger
+        key={deckId}
+        onConfirm={(data: any) => {
+          if (!deckId) {
+            return
+          }
+          handleEdit({ id: deckId, ...data })
+        }}
+        open={showEditModal}
+        setOpen={() => setDeckToEditId(null)}
+      />
     </div>
   )
 }

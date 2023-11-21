@@ -43,7 +43,7 @@ export const NewPassword = ({ onSubmit }: Props) => {
           <Typography as={'div'} className={s.text} variant={'body2'}>
             Create new password and we will send you further instructions to email
           </Typography>
-          <Button fullWidth type={'submit'}>
+          <Button className={s.button} fullWidth type={'submit'}>
             Create New Password
           </Button>
         </div>

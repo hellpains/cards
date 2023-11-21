@@ -2,6 +2,13 @@
   width: 1008px;
   margin: 0 auto;
 
+  .noContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+  }
+
   .decks__header {
     display: flex;
     justify-content: space-between;

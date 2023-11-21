@@ -13,11 +13,12 @@ const UpdateDeckSchema = z.object({
 })
 
 type FormValues = z.infer<typeof UpdateDeckSchema>
+type Data = { isPrivate: boolean; name: string }
 
 type Props = {
-  defaultValues?: any
+  defaultValues?: Data
   dontShowTrigger?: boolean
-  onConfirm: any
+  onConfirm: (data: Data) => void
   open: boolean
   setOpen: (open: boolean) => void
 }
@@ -37,7 +38,7 @@ export const UpdateDeckModal = ({
     resolver: zodResolver(UpdateDeckSchema),
   })
 
-  const onSubmitHandler = handleSubmit(data => {
+  const onSubmitHandler = handleSubmit((data: Data) => {
     onConfirm(data)
     setOpen(false)
     reset()

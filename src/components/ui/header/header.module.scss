@@ -19,6 +19,11 @@
 
       text-decoration: underline dashed;
       text-underline-offset: 7px;
+
+      .avatar:hover {
+        box-shadow: 0 1px 20px 1px rgb(105 0 255 / 100%);
+        transition: 0.2s;
+      }
     }
 
     .logo {

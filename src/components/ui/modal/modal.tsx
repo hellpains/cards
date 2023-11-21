@@ -27,8 +27,8 @@ export const Modal = ({
   ...props
 }: ModalPropsType) => {
   return (
-    <RadixDialog.Root {...props}>
-      <RadixDialog.Trigger className={s.trigger}>
+    <RadixDialog.Root {...props} onOpenChange={setOpen}>
+      <RadixDialog.Trigger asChild className={s.trigger} onClick={() => setOpen(true)}>
         {!dontShowTrigger && <Button onClick={() => setOpen(true)}>{title}</Button>}
       </RadixDialog.Trigger>
       <RadixDialog.Portal>
