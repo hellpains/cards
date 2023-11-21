@@ -97,6 +97,7 @@ export const DecksPage = () => {
   if (!decks) {
     return <Loader />
   }
+  console.log(currentTab)
 
   return (
     <div className={s.decks}>
@@ -115,8 +116,8 @@ export const DecksPage = () => {
           <TextField className={s.input} onValueChange={onSearch} placeholder={'Search'} search />
           <TabSwitcher
             changeValue={setCurrentTabHandler}
-            defaultValue={currentTab}
             label={'Show packs deck'}
+            value={currentTab}
           >
             <TabTrigger title={'My Decks'} value={'myDecks'} />
             <TabTrigger title={'All Decks'} value={'allDecks'} />
