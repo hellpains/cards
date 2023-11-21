@@ -5,8 +5,7 @@ import { useResetPasswordMutation } from '@/services/auth'
 
 import s from './new-password-page.module.scss'
 
-type Props = {}
-export const NewPasswordPage = (props: Props) => {
+export const NewPasswordPage = () => {
   const params = useParams()
 
   const [reset] = useResetPasswordMutation()
