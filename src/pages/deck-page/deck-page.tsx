@@ -74,18 +74,19 @@ export const DeckPage = () => {
           </div>
         )}
       </div>
+
       <UpdateDeckModal
         defaultValues={deck}
-        dontShowTrigger
-        key={deckId}
-        onConfirm={(data: any) => {
-          if (!deckId) {
+        key={deckToEditId}
+        onCancel={() => setDeckToEditId(null)}
+        onConfirm={(data: { isPrivate: boolean; name: string }) => {
+          if (!deckToEditId) {
             return
           }
-          handleEdit({ id: deckId, ...data })
+          handleEdit({ id: deckToEditId, ...data })
         }}
+        onOpenChange={() => setDeckToEditId(null)}
         open={showEditModal}
-        setOpen={() => setDeckToEditId(null)}
       />
     </div>
   )

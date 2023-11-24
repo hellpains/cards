@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: space-between;
 
-    width: 1030px;
+    width: 1010px;
     height: 60px;
     margin: 0 auto;
 
@@ -28,6 +28,11 @@
     }
 
     .logo {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+
       text-decoration: none;
 
       .logoText {
@@ -37,6 +42,7 @@
 
     .button {
       padding: 6px 28px;
+      text-decoration: none;
       border-radius: 4px;
     }
   }

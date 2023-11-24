@@ -5,7 +5,7 @@ import { LoginArgs, useLoginMutation, useMeQuery } from '@/services/auth'
 
 export const SignInPage = () => {
   const navigate = useNavigate()
-  const { isError } = useMeQuery()
+  const { data } = useMeQuery()
   const [login] = useLoginMutation()
 
   const handleLogin = async (args: LoginArgs) => {
@@ -17,7 +17,7 @@ export const SignInPage = () => {
     }
   }
 
-  if (!isError) {
+  if (data) {
     navigate('/')
   }
 

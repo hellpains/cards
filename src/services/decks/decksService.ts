@@ -57,7 +57,7 @@ export const decksService = baseApi.injectEndpoints({
           }
         },
       }),
-      updateDeck: builder.mutation<Deck, { body: CreateDeckBody; id: string }>({
+      updateDeck: builder.mutation<Deck, { id: string; isPrivate: boolean; name: string }>({
         invalidatesTags: ['Decks'],
         onQueryStarted: async ({ id, ...body }, { dispatch, getState, queryFulfilled }) => {
           const state = getState() as RootState

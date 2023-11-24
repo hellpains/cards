@@ -1,3 +1,18 @@
 .container {
   margin: 24px;
 }
+
+.closeButton {
+  all: unset;
+
+  cursor: pointer;
+
+  display: flex;
+
+  width: 24px;
+  height: 24px;
+
+  &:focus {
+    outline: none;
+  }
+}

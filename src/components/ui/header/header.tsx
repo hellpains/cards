@@ -27,7 +27,7 @@ export const Header = ({}: HeaderProps) => {
       <div className={s.container}>
         <NavLink className={s.logo} to={'/'}>
           <Typography className={s.logoText} variant={'h2'}>
-            Quizlet
+            Quizlet{' '}
           </Typography>
         </NavLink>
         {!isError ? (

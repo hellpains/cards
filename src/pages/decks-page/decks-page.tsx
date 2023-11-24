@@ -67,7 +67,7 @@ export const DecksPage = () => {
   const [createDeck] = useCreateDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
   const [deleteDeck] = useDeleteDeckMutation()
-
+  const openCreateModal = () => setShowCreateModal(true)
   const setSlider = (value: number[]) => {
     setMinCards(value[0])
     setMaxCards(value[1])
@@ -106,10 +106,12 @@ export const DecksPage = () => {
       <div className={s.container}>
         <div className={s.decks__header}>
           <Typography variant={'large'}>Decks List</Typography>
+          <Button onClick={openCreateModal}>Add new deck</Button>
           <CreateDeckModal
+            onCancel={() => setShowCreateModal(false)}
             onConfirm={createDeck}
+            onOpenChange={setShowCreateModal}
             open={showCreateModal}
-            setOpen={setShowCreateModal}
           />
         </div>
         <div className={s.decks__filter}>
@@ -143,54 +145,48 @@ export const DecksPage = () => {
           </Button>
         </div>
 
-        {decks?.items.length ? (
-          <>
-            <DecksTable
-              authorId={me?.id}
-              decks={decksForTable}
-              learnDeck={learnDeck}
-              onDeleteClick={setDeckToDeleteId}
-              onEditClick={setDeckToEditId}
-            />
-            {decks?.pagination.totalItems >= 6 && (
-              <Pagination
-                limit={perPage}
-                page={currentPage}
-                setLimit={setPerPage}
-                setPage={setPage}
-                totalPage={decks?.pagination?.totalPages}
-              />
-            )}
-          </>
-        ) : (
-          <Typography className={s.noContent} variant={'body1'}>
-            No content with these terms...
-          </Typography>
+        <DecksTable
+          authorId={me?.id}
+          decks={decksForTable}
+          learnDeck={learnDeck}
+          onDeleteClick={setDeckToDeleteId}
+          onEditClick={setDeckToEditId}
+        />
+        {decksData?.pagination.totalItems > 5 && (
+          <Pagination
+            limit={perPage}
+            page={currentPage}
+            setLimit={setPerPage}
+            setPage={setPage}
+            totalPage={decksData?.pagination?.totalPages}
+          />
         )}
+        {/*<Typography className={s.noContent} variant={'body1'}>*/}
+        {/*  No content with these terms...*/}
+        {/*</Typography>*/}
       </div>
       <div>
         <UpdateDeckModal
           defaultValues={deckToEdit}
-          dontShowTrigger
           key={deckToEditId}
-          onConfirm={(data: any) => {
+          onCancel={() => setDeckToEditId(null)}
+          onConfirm={(data: { isPrivate: boolean; name: string }) => {
             if (!deckToEditId) {
               return
             }
             updateDeck({ id: deckToEditId, ...data })
           }}
+          onOpenChange={() => setDeckToEditId(null)}
           open={showEditModal}
-          setOpen={() => setDeckToEditId(null)}
         />
         <DeleteDeckModal
           deckToDeleteName={deckToDeleteName}
-          dontShowTrigger
           onConfirm={() => {
             deleteDeck(deckToDeleteId ?? '')
             setDeckToDeleteId(null)
           }}
+          onOpenChange={() => setDeckToDeleteId(null)}
           open={showConfirmDeleteModal}
-          setOpen={() => setDeckToDeleteId(null)}
         />
       </div>
     </div>

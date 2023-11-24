@@ -1,39 +1,20 @@
-import { Modal, Typography } from '@/components'
+import { Typography } from '@/components'
+import { Dialog, DialogProps } from '@/components/ui/dialog'
 
 import s from './delete-deck-modal.module.scss'
 
-type Props = {
+type Props = Pick<DialogProps, 'onCancel' | 'onOpenChange' | 'open'> & {
   deckToDeleteName: string | undefined
-  defaultValues?: any
-  dontShowTrigger?: boolean
   onConfirm: any
-  open: boolean
-  setOpen: (open: boolean) => void
 }
-export const DeleteDeckModal = ({
-  deckToDeleteName,
-  dontShowTrigger,
-  onConfirm,
-  open,
-  setOpen,
-  ...modalProps
-}: Props) => {
+export const DeleteDeckModal = ({ deckToDeleteName, onConfirm, ...modalProps }: Props) => {
   return (
-    <Modal
-      confirmText={'Delete Deck'}
-      dontShowTrigger={dontShowTrigger}
-      handleCancel={() => setOpen(false)}
-      handleConfirm={onConfirm}
-      open={open}
-      setOpen={setOpen}
-      title={'Delete Deck'}
-      {...modalProps}
-    >
+    <Dialog confirmText={'Delete Deck'} onConfirm={onConfirm} title={'Delete Deck'} {...modalProps}>
       <div className={s.container}>
         <Typography>
           Do you really want to remove <b>{deckToDeleteName}</b>? All cards will be deleted.
         </Typography>
       </div>
-    </Modal>
+    </Dialog>
   )
 }

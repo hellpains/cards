@@ -34,6 +34,7 @@ export type CreateDeckBody = {
   isPrivate?: boolean
   name?: string
 }
+export type UpdateDeckData = { id: string; isPrivate: boolean; name: string }
 export type CreateDeckResponse = {
   author: Author
   cardsCount: number

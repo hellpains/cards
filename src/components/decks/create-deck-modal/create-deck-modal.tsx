@@ -1,7 +1,8 @@
 import { useForm } from 'react-hook-form'
 
-import { ControlledCheckbox, Modal } from '@/components'
+import { ControlledCheckbox } from '@/components'
 import { ControlledTextField } from '@/components/controlled/controlled-textField'
+import { Dialog, DialogProps } from '@/components/ui/dialog'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -14,49 +15,45 @@ const CreateDeckSchema = z.object({
 
 type FormValues = z.infer<typeof CreateDeckSchema>
 
-type DeckModalProps = {
+type DeckModalProps = Pick<DialogProps, 'onCancel' | 'onOpenChange' | 'open'> & {
   defaultValues?: any
   onConfirm: any
-  open: boolean
-  setOpen: (open: boolean) => void
 }
 export const CreateDeckModal = ({
-  defaultValues = {
-    isPrivate: false,
-    name: '',
-  },
+  defaultValues = { isPrivate: false, name: '' },
+  onCancel,
   onConfirm,
-  open,
-  setOpen,
-  ...modalProps
+  ...dialogProps
 }: DeckModalProps) => {
   const { control, handleSubmit, reset } = useForm<FormValues>({
     defaultValues,
     resolver: zodResolver(CreateDeckSchema),
   })
 
-  const onSubmitHandler = handleSubmit(data => {
+  const onSubmit = handleSubmit(data => {
     onConfirm(data)
-    setOpen(false)
+    dialogProps.onOpenChange?.(false)
     reset()
   })
+  const handleCancel = () => {
+    reset()
+    onCancel?.()
+  }
 
   return (
-    <Modal
-      confirmText={'Add New Pack'}
-      handleCancel={() => setOpen(false)}
-      handleConfirm={onSubmitHandler}
-      open={open}
-      setOpen={setOpen}
+    <Dialog
+      confirmText={'Add New Deck'}
+      onCancel={handleCancel}
+      onConfirm={onSubmit}
       title={'Add New Deck'}
-      {...modalProps}
+      {...dialogProps}
     >
-      <form onSubmit={onSubmitHandler}>
+      <form onSubmit={onSubmit}>
         <div className={s.container}>
           <ControlledTextField control={control} label={'Name Deck'} name={'name'} />
           <ControlledCheckbox control={control} label={'Private deck'} name={'isPrivate'} />
         </div>
       </form>
-    </Modal>
+    </Dialog>
   )
 }

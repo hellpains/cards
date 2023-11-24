@@ -1,56 +1,34 @@
 import { ComponentPropsWithoutRef, ReactNode } from 'react'
 
 import { Close } from '@/assets'
-import { Button, Typography } from '@/components'
+import { Typography } from '@/components'
 import * as RadixDialog from '@radix-ui/react-dialog'
 
 import s from './Modal.module.scss'
 
 export type ModalPropsType = {
-  children: ReactNode
-  confirmText?: string
-  dontShowTrigger?: boolean
-  handleCancel?: any
-  handleConfirm?: any
+  children?: ReactNode
+  onOpenChange?: (open: boolean) => void
   open?: boolean
-  setOpen: (open: boolean) => void
   title?: string
 } & Omit<ComponentPropsWithoutRef<typeof RadixDialog.Dialog>, 'onOpenChange' | 'open'>
-export const Modal = ({
-  children,
-  confirmText,
-  dontShowTrigger,
-  handleCancel,
-  handleConfirm,
-  setOpen,
-  title,
-  ...props
-}: ModalPropsType) => {
+export const Modal = ({ children, title, ...props }: ModalPropsType) => {
   return (
-    <RadixDialog.Root {...props} onOpenChange={setOpen}>
-      <RadixDialog.Trigger asChild className={s.trigger} onClick={() => setOpen(true)}>
-        {!dontShowTrigger && <Button onClick={() => setOpen(true)}>{title}</Button>}
-      </RadixDialog.Trigger>
+    <RadixDialog.Root {...props}>
       <RadixDialog.Portal>
         <RadixDialog.Overlay className={s.overlay} />
         <RadixDialog.Content className={s.content}>
           <div className={s.header}>
             <RadixDialog.Title asChild>
-              <Typography as={'h2'} variant={'h2'}>
+              <Typography as={'h2'} className={s.title} variant={'h2'}>
                 {title}
               </Typography>
             </RadixDialog.Title>
-            <RadixDialog.Close className={s.closeButton} onClick={() => setOpen(false)}>
+            <RadixDialog.Close className={s.closeButton}>
               <Close />
             </RadixDialog.Close>
           </div>
           {children}
-          <div className={s.buttons}>
-            <Button onClick={handleCancel} variant={'secondary'}>
-              Cancel
-            </Button>
-            <Button onClick={handleConfirm}>{confirmText}</Button>
-          </div>
         </RadixDialog.Content>
       </RadixDialog.Portal>
     </RadixDialog.Root>
